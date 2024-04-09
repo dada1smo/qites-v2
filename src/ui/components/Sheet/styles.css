@@ -1,0 +1,51 @@
+.overlay-show {
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+.overlay-hide {
+  animation: overlayHide 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes overlayHide {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.bottom-sheet-show {
+  animation: bottomSheetShow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes bottomSheetShow {
+  from {
+    bottom: -74vh;
+  }
+  to {
+    bottom: 0;
+  }
+}
+
+.bottom-sheet-hide {
+  animation: bottomSheetHide 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes bottomSheetHide {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: -74vh;
+  }
+}

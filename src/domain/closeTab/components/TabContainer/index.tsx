@@ -3,7 +3,7 @@
 import { FunctionComponent } from 'react';
 import useTab from '../../hooks/use-tab';
 import TabTotalForm from '../TabTotalForm';
-import AddTabItem from '../AddTabItem';
+import TabItemSection from '../TabItemSection';
 
 const TabContainer: FunctionComponent = () => {
   const { tab, setTabTotal } = useTab();
@@ -11,7 +11,7 @@ const TabContainer: FunctionComponent = () => {
   return (
     <>
       <TabTotalForm tab={tab} setTabTotal={setTabTotal} />
-      <AddTabItem tab={tab} />
+      <TabItemSection tab={tab} />
     </>
   );
 };

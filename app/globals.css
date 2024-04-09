@@ -16,6 +16,12 @@
   }
 }
 
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
 html {
   overflow: hidden;
 }
@@ -49,10 +55,4 @@ body {
   );
   z-index: -1;
   pointer-events: none;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }
