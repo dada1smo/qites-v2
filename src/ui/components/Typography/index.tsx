@@ -13,6 +13,7 @@ const typographyVariants = cva('font-sans', {
       strong: 'text-lg leading-6 font-medium text-slate-100',
       p: 'text-lg leading-6 text-slate-400',
       link: 'text-base underline',
+      number: 'text-xl leading-6 font-mono font-bold text-teal-600',
     },
     align: {
       center: 'text-center',
@@ -27,10 +28,11 @@ const typographyVariants = cva('font-sans', {
 });
 
 interface TypographyProps extends VariantProps<typeof typographyVariants> {
-  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'li';
+  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'li' | 'label';
   children: ReactNode;
   className?: string;
   id?: string;
+  htmlFor?: string;
 }
 
 const Typography: FunctionComponent<TypographyProps> = ({
@@ -40,10 +42,12 @@ const Typography: FunctionComponent<TypographyProps> = ({
   children,
   className,
   id,
+  htmlFor,
 }) => {
   return (
     <Tag
       id={id}
+      htmlFor={htmlFor}
       className={cn(typographyVariants({ variant, align, className }))}
     >
       {children}

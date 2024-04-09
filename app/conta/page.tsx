@@ -1,7 +1,7 @@
 'use client';
 
 import TabTotalForm from '@/src/domain/closeTab/components/TabTotalForm';
-import Typography from '@/src/ui/Typography';
+import Typography from '@/src/ui/components/Typography';
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
       <Typography as="h1" variant="h1">
         Fechar conta
       </Typography>
-      <div className="flex justify-between mt-4">
+      <div className="mt-4">
         <TabTotalForm />
       </div>
     </main>

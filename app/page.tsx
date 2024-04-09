@@ -1,5 +1,5 @@
-import LinkCard from '@/src/ui/LinkCard';
-import Typography from '@/src/ui/Typography';
+import LinkCard from '@/src/ui/components/LinkCard';
+import Typography from '@/src/ui/components/Typography';
 import Image from 'next/image';
 
 export default function Home() {
