@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { ZodType } from 'zod';
 
 export default function useCustomForm<T>({ schema }: { schema: ZodType<T> }) {
@@ -9,7 +9,7 @@ export default function useCustomForm<T>({ schema }: { schema: ZodType<T> }) {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm<FieldValues, T>({ resolver: zodResolver(schema) });
 
   return {
     control,

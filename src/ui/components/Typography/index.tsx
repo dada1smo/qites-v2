@@ -11,7 +11,7 @@ const typographyVariants = cva('font-sans', {
       h4: 'text-xl font-medium lg:text-lg',
       subtitle: 'text-2xl leading-7',
       strong: 'text-lg leading-6 font-medium text-slate-100',
-      p: 'text-lg leading-6 text-slate-400',
+      p: 'text-lg leading-6 text-slate-300',
       link: 'text-base underline',
       number: 'text-xl leading-6 font-mono font-bold text-teal-600',
     },

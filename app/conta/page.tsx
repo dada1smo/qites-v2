@@ -1,5 +1,4 @@
-'use client';
-
+import TabContainer from '@/src/domain/closeTab/components/TabContainer';
 import TabTotalForm from '@/src/domain/closeTab/components/TabTotalForm';
 import Typography from '@/src/ui/components/Typography';
 
@@ -10,7 +9,7 @@ export default function Home() {
         Fechar conta
       </Typography>
       <div className="mt-4">
-        <TabTotalForm />
+        <TabContainer />
       </div>
     </main>
   );

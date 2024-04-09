@@ -2,23 +2,31 @@ import useCustomForm from '@/src/application/hooks/use-custom-form';
 import { FunctionComponent } from 'react';
 import { TabTotalSchema } from './validationSchema';
 import { TabTotalType } from '../../types/TabTotalType';
-import Typography from '@/src/ui/components/Typography';
 import Form from '@/src/ui/components/Form';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
+import TabModel from '../../models/TabModel';
+import { FieldValues } from 'react-hook-form';
 
 interface TabTotalFormProps {
-  // fix
-  tabModel?: any;
+  tab: TabModel;
+  setTabTotal: (total: number) => void;
 }
 
-const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({ tabModel }) => {
+const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
+  tab,
+  setTabTotal,
+}) => {
   const { control, handleSubmit } = useCustomForm<TabTotalType>({
     schema: TabTotalSchema,
   });
 
+  const submit = (data: FieldValues) => {
+    setTabTotal(data.tabTotal);
+  };
+
   return (
     <Form
-      onSubmit={handleSubmit(() => console.log('test'))}
+      onSubmit={handleSubmit(submit)}
       className="flex items-center justify-between w-full"
     >
       <ControlledPillInput
