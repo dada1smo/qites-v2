@@ -21,12 +21,18 @@ const LinkCard: FunctionComponent<LinkCardProps> = ({
       href={href}
       className="bg-slate-900 w-full flex gap-3 rounded-3xl px-6 py-4"
     >
-      <Image src={iconSrc} alt="" width={24} height={24} />
+      <Image
+        src={iconSrc}
+        alt=""
+        width={24}
+        height={24}
+        style={{ width: 'auto', height: 'auto' }}
+      />
       <div className="flex flex-col gap-1">
-        <Typography as="h3" variant="strong" className="text-slate-100">
+        <Typography as="h3" variant="strong">
           {title}
         </Typography>
-        <Typography as="p" variant="p" className="text-slate-400">
+        <Typography as="p" variant="p">
           {description}
         </Typography>
       </div>

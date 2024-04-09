@@ -13,7 +13,7 @@ export default function Home() {
           title="Fechar conta"
           description="Pra cada pessoa pagar o que consumiu"
           iconSrc="/receipt.svg"
-          href=""
+          href="/conta"
         />
         <LinkCard
           title="Dividir gastos"

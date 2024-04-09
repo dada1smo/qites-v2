@@ -10,8 +10,8 @@ const typographyVariants = cva('font-sans', {
       h3: 'text-2xl font-medium lg:text-3xl',
       h4: 'text-xl font-medium lg:text-lg',
       subtitle: 'text-2xl leading-7',
-      strong: 'text-lg leading-6 font-medium',
-      p: 'text-lg leading-6',
+      strong: 'text-lg leading-6 font-medium text-slate-100',
+      p: 'text-lg leading-6 text-slate-400',
       link: 'text-base underline',
     },
     align: {
