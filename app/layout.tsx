@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${space_mono.variable}`}>
+        <div className="amber-gradient-bg"></div>
         {children}
       </body>
     </html>

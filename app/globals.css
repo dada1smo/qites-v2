@@ -16,8 +16,39 @@
   }
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   font-family: var(--font-inter);
+  background: linear-gradient(
+      to bottom right,
+      transparent,
+      var(--color-slate-800)
+    )
+    var(--color-teal-900);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.amber-gradient-bg {
+  position: absolute;
+  top: -200vh;
+  right: 0;
+  width: 400%;
+  height: 400%;
+  background: radial-gradient(
+    circle at center,
+    var(--color-amber-500) 0%,
+    var(--color-amber-600) 20%,
+    var(--color-teal-900) 40%,
+    var(--color-slate-800) 60%,
+    transparent 100%
+  );
+  z-index: -1;
+  pointer-events: none;
 }
 
 @layer utilities {
