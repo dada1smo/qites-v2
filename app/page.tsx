@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className="pt-6 pb-8 px-6 flex flex-col items-stretch justify-end h-screen">
+    <main className="pt-6 pb-8 px-6 flex flex-col items-stretch justify-end h-[100dvh]">
       <Typography as="h1" variant="h1">
         O que você gostaria de fazer?
       </Typography>

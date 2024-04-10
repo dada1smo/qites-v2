@@ -29,7 +29,7 @@ const Sheet: FunctionComponent<SheetProps> = ({
     <Dialog.Root defaultOpen={false} open={open} onOpenChange={handleClose}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className={`fixed top-0 left-0 h-screen w-screen bg-slate-900 ${
+          className={`fixed top-0 left-0 h-[100dvh] w-screen bg-slate-900 ${
             willClose && 'overlay-hide'
           } ${open ? 'opacity-30 overlay-show' : 'opacity-0'}`}
         />
