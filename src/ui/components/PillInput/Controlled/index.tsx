@@ -14,6 +14,16 @@ interface ControlledPillInputProps {
   label?: string;
   step?: string;
   fieldProps?: VariantProps<typeof fieldVariants>;
+  inputMode?:
+    | 'email'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url'
+    | 'none'
+    | 'numeric'
+    | 'decimal';
+  pattern?: string;
 }
 
 const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
@@ -26,6 +36,8 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
   label,
   step,
   fieldProps,
+  inputMode,
+  pattern,
 }) => {
   return (
     <Controller

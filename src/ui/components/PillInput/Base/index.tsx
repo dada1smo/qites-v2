@@ -36,6 +36,16 @@ export interface PillInputProps {
   preffix?: string;
   fieldProps?: VariantProps<typeof fieldVariants>;
   step?: string;
+  inputMode?:
+    | 'email'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url'
+    | 'none'
+    | 'numeric'
+    | 'decimal';
+  pattern?: string;
 }
 
 const PillInput: FunctionComponent<PillInputProps> = ({
@@ -51,6 +61,8 @@ const PillInput: FunctionComponent<PillInputProps> = ({
   preffix,
   fieldProps,
   step,
+  inputMode,
+  pattern,
 }) => {
   return (
     <div className={cn(fieldVariants({ ...fieldProps }))}>
@@ -76,6 +88,8 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           type={type}
           className="w-20 bg-transparent text-xl leading-6 font-mono font-bold text-teal-600 placeholder:text-teal-800"
           step={step}
+          inputMode={inputMode}
+          pattern={pattern}
         />
       </div>
     </div>

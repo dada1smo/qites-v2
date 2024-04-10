@@ -25,7 +25,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
     },
   });
 
-  const submit = (data: FieldValues) => {
+  const submit = (data: any) => {
     console.log(data);
     setTabTotal(data.tabTotal);
   };
@@ -40,9 +40,10 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
         label="Total a pagar"
         placeholder="0,00"
         control={control}
-        type="number"
         preffix="R$"
-        step="0.01"
+        type="text"
+        inputMode="decimal"
+        pattern="[0-9]*"
       />
     </Form>
   );
