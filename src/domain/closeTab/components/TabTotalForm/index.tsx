@@ -42,7 +42,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
         control={control}
         preffix="R$"
         type="text"
-        inputMode="numeric"
+        inputMode="decimal"
         pattern="[0-9]*"
       />
     </Form>
