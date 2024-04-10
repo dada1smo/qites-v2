@@ -35,6 +35,7 @@ export interface PillInputProps {
   type?: HTMLInputTypeAttribute;
   preffix?: string;
   fieldProps?: VariantProps<typeof fieldVariants>;
+  step?: string;
 }
 
 const PillInput: FunctionComponent<PillInputProps> = ({
@@ -49,6 +50,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
   type,
   preffix,
   fieldProps,
+  step,
 }) => {
   return (
     <div className={cn(fieldVariants({ ...fieldProps }))}>
@@ -73,6 +75,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           onBlur={onBlur}
           type={type}
           className="w-20 bg-transparent text-xl leading-6 font-mono font-bold text-teal-600 placeholder:text-teal-800"
+          step={step}
         />
       </div>
     </div>

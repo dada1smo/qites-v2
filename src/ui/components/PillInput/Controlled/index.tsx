@@ -12,6 +12,7 @@ interface ControlledPillInputProps {
   onInputBlur?: Function;
   preffix?: string;
   label?: string;
+  step?: string;
   fieldProps?: VariantProps<typeof fieldVariants>;
 }
 
@@ -23,6 +24,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
   onInputChange,
   preffix,
   label,
+  step,
   fieldProps,
 }) => {
   return (
@@ -50,6 +52,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
           type={type}
           preffix={preffix}
           label={label}
+          step={step}
           fieldProps={fieldProps}
         />
       )}

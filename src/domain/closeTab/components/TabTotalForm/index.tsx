@@ -42,6 +42,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
         control={control}
         type="number"
         preffix="R$"
+        step="0.01"
       />
     </Form>
   );
