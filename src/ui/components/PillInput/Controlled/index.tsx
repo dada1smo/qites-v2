@@ -66,6 +66,8 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
           label={label}
           step={step}
           fieldProps={fieldProps}
+          inputMode={inputMode}
+          pattern={pattern}
         />
       )}
     />
