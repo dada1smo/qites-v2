@@ -5,18 +5,36 @@ import {
   HTMLInputTypeAttribute,
 } from 'react';
 import Typography from '../../Typography';
+import { VariantProps, cva } from 'class-variance-authority';
+import { cn } from '@/src/utils/cn';
+
+export const fieldVariants = cva(
+  'rounded-3xl py-1 pl-3 pr-2 flex gap-2 w-full justify-between items-center',
+  {
+    variants: {
+      color: {
+        primary: 'bg-slate-900',
+        secondary: 'bg-teal-900',
+      },
+    },
+    defaultVariants: {
+      color: 'primary',
+    },
+  }
+);
 
 export interface PillInputProps {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  onBlur: FocusEventHandler<HTMLInputElement>;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
   name: string;
-  inputRef: any;
+  inputRef?: any;
   label?: string;
   placeholder?: string;
   error?: any;
   type?: HTMLInputTypeAttribute;
   preffix?: string;
+  fieldProps?: VariantProps<typeof fieldVariants>;
 }
 
 const PillInput: FunctionComponent<PillInputProps> = ({
@@ -30,9 +48,10 @@ const PillInput: FunctionComponent<PillInputProps> = ({
   error,
   type,
   preffix,
+  fieldProps,
 }) => {
   return (
-    <div className="bg-slate-900 rounded-3xl py-1 pl-3 pr-1 flex gap-2 w-full justify-between items-center">
+    <div className={cn(fieldVariants({ ...fieldProps }))}>
       {label && (
         <Typography as="p" variant="strong">
           {label}

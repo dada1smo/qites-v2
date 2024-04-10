@@ -1,6 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { FunctionComponent, ReactNode, useState } from 'react';
 import './styles.css';
+import Button from '../Button/index';
 
 interface SheetProps {
   open: boolean;
@@ -33,12 +34,23 @@ const Sheet: FunctionComponent<SheetProps> = ({
           } ${open ? 'opacity-30 overlay-show' : 'opacity-0'}`}
         />
         <Dialog.Content
-          className={`fixed left-0 bg-teal-800 w-full h-[74vh] rounded-t-3xl p-6 ${
+          className={`fixed left-0 bg-slate-900 w-full h-[98vh] rounded-t-3xl p-6 ${
             willClose && 'bottom-sheet-hide'
-          } ${open ? 'bottom-0 bottom-sheet-show' : 'bottom-[-74vh]'}`}
+          } ${open ? 'bottom-0 bottom-sheet-show' : 'bottom-[-98vh]'}`}
         >
+          <div className="mb-2">
+            <Dialog.Close asChild>
+              <Button
+                label="Fechar"
+                type="button"
+                color="basic"
+                shape="circle"
+                padding="clear"
+                icon={{ src: '/arrow-back.svg', position: 'center', size: 24 }}
+              />
+            </Dialog.Close>
+          </div>
           {children}
-          <Dialog.Close />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

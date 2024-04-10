@@ -6,8 +6,8 @@ export default function useTab() {
 
   function setTabTotal(total: number) {
     return setTab((t) => {
-      t.setTotal(total);
-      return t;
+      const update = new TabModel().duplicate(t).setTotal(total);
+      return update;
     });
   }
 

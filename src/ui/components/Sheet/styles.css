@@ -30,7 +30,7 @@
 
 @keyframes bottomSheetShow {
   from {
-    bottom: -74vh;
+    bottom: -98vh;
   }
   to {
     bottom: 0;
@@ -46,6 +46,6 @@
     bottom: 0;
   }
   to {
-    bottom: -74vh;
+    bottom: -98vh;
   }
 }

@@ -8,9 +8,8 @@ export default function Home() {
       <Typography as="h1" variant="h1">
         Fechar conta
       </Typography>
-      <div className="mt-4">
-        <TabContainer />
-      </div>
+
+      <TabContainer />
     </main>
   );
 }

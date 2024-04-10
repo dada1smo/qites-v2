@@ -1,6 +1,7 @@
 import { ChangeEvent, FunctionComponent, HTMLInputTypeAttribute } from 'react';
 import { Control, Controller, FieldErrors, FieldValues } from 'react-hook-form';
-import PillInput from '../Base';
+import PillInput, { PillInputProps, fieldVariants } from '../Base';
+import { VariantProps } from 'class-variance-authority';
 
 interface ControlledPillInputProps {
   name: string;
@@ -11,6 +12,7 @@ interface ControlledPillInputProps {
   onInputBlur?: Function;
   preffix?: string;
   label?: string;
+  fieldProps?: VariantProps<typeof fieldVariants>;
 }
 
 const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
@@ -21,6 +23,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
   onInputChange,
   preffix,
   label,
+  fieldProps,
 }) => {
   return (
     <Controller
@@ -47,6 +50,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
           type={type}
           preffix={preffix}
           label={label}
+          fieldProps={fieldProps}
         />
       )}
     />

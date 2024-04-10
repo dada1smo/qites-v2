@@ -34,6 +34,7 @@ body {
       var(--color-slate-800)
     )
     var(--color-teal-900);
+  background: var(--color-slate-800);
   min-height: 100vh;
   position: relative;
   overflow: hidden;
@@ -48,11 +49,13 @@ body {
   background: radial-gradient(
     circle at center,
     var(--color-amber-500) 0%,
-    var(--color-amber-600) 20%,
-    var(--color-teal-900) 40%,
-    var(--color-slate-800) 60%,
+    var(--color-amber-800) 20%,
+    var(--color-slate-900) 40%,
+    var(--color-slate-800) 50%,
+    var(--color-teal-900) 60%,
     transparent 100%
   );
+  opacity: 0.5;
   z-index: -1;
   pointer-events: none;
 }

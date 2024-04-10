@@ -3,7 +3,7 @@ import { FormEventHandler, FunctionComponent, ReactNode } from 'react';
 interface FormProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
   children: ReactNode;
-  className: string;
+  className?: string;
 }
 
 const Form: FunctionComponent<FormProps> = ({

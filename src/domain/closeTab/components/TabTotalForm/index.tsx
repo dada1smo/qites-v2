@@ -16,11 +16,17 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
   tab,
   setTabTotal,
 }) => {
+  const defaultTotal = tab.getTotal() === 0 ? undefined : tab.getTotal();
+
   const { control, handleSubmit } = useCustomForm<TabTotalType>({
     schema: TabTotalSchema,
+    defaultValues: {
+      tabTotal: defaultTotal,
+    },
   });
 
   const submit = (data: FieldValues) => {
+    console.log(data);
     setTabTotal(data.tabTotal);
   };
 
@@ -32,7 +38,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
       <ControlledPillInput
         name="tabTotal"
         label="Total a pagar"
-        placeholder="000,00"
+        placeholder="0,00"
         control={control}
         type="number"
         preffix="R$"

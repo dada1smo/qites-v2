@@ -5,7 +5,7 @@ import { FunctionComponent, ReactNode } from 'react';
 const typographyVariants = cva('font-sans', {
   variants: {
     variant: {
-      h1: 'text-4xl font-bold text-teal-200',
+      h1: 'text-4xl font-bold text-slate-300',
       h2: 'text-2xl font-bold lg:text-3xl',
       h3: 'text-2xl font-medium lg:text-3xl',
       h4: 'text-xl font-medium lg:text-lg',
