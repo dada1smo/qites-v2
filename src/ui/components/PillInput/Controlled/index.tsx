@@ -32,6 +32,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
   placeholder,
   type,
   onInputChange,
+  onInputBlur,
   preffix,
   label,
   step,
@@ -49,7 +50,12 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
       }) => (
         <PillInput
           name={name}
-          onBlur={onBlur}
+          onBlur={() => {
+            if (onInputBlur) {
+              onInputBlur();
+            }
+            onBlur();
+          }}
           onChange={(e) => {
             const targetValue = handleNumberInput(e, type);
             if (onInputChange) {

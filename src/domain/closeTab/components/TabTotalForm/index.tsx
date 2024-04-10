@@ -5,7 +5,6 @@ import { TabTotalType } from '../../types/TabTotalType';
 import Form from '@/src/ui/components/Form';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
 import TabModel from '../../models/TabModel';
-import { FieldValues } from 'react-hook-form';
 
 interface TabTotalFormProps {
   tab: TabModel;
@@ -44,6 +43,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
         type="text"
         inputMode="decimal"
         pattern="[0-9]*"
+        onInputBlur={handleSubmit(submit)}
       />
     </Form>
   );
