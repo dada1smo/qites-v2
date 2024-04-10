@@ -10,6 +10,7 @@ interface ControlledPillInputProps {
   type?: HTMLInputTypeAttribute;
   onInputChange?: Function;
   onInputBlur?: Function;
+  coerceNumber?: boolean;
   preffix?: string;
   label?: string;
   step?: string;
@@ -39,6 +40,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
   fieldProps,
   inputMode,
   pattern,
+  coerceNumber,
 }) => {
   return (
     <Controller
@@ -58,9 +60,16 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
           }}
           onChange={(e) => {
             const targetValue = handleNumberInput(e, type);
+
             if (onInputChange) {
               onInputChange(targetValue);
             }
+
+            if (coerceNumber) {
+              const changedValue = handleCommaLocaleFloat(e);
+              return onChange(changedValue);
+            }
+
             onChange(targetValue);
           }}
           value={value}
@@ -96,3 +105,10 @@ function handleNumberInput(
 
   return e.target.value;
 }
+
+const handleCommaLocaleFloat = (e: ChangeEvent<HTMLInputElement>) => {
+  const { value } = e.target;
+  const split = value.split(',');
+  const join = split.join('.');
+  return join;
+};
