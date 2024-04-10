@@ -1,10 +1,11 @@
 import useCustomForm from '@/src/application/hooks/use-custom-form';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { TabTotalSchema } from './validationSchema';
 import { TabTotalType } from '../../types/TabTotalType';
 import Form from '@/src/ui/components/Form';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
 import TabModel from '../../models/TabModel';
+import useDetectMobileKeyboard from '@/src/ui/hooks/use-detect-mobile-keyboard';
 
 interface TabTotalFormProps {
   tab: TabModel;
@@ -17,6 +18,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
 }) => {
   const defaultTotal = tab.getTotal() === 0 ? undefined : tab.getTotal();
 
+  const { isKeyboardOpen } = useDetectMobileKeyboard();
   const { control, handleSubmit } = useCustomForm<TabTotalType>({
     schema: TabTotalSchema,
     defaultValues: {
@@ -25,9 +27,15 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
   });
 
   const submit = (data: any) => {
-    console.log(data);
     setTabTotal(data.tabTotal);
   };
+
+  useEffect(() => {
+    if (isKeyboardOpen === false) {
+      handleSubmit(submit);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isKeyboardOpen]);
 
   return (
     <Form
