@@ -35,14 +35,14 @@ body {
     )
     var(--color-teal-900);
   background: var(--color-slate-800);
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   overflow: hidden;
 }
 
 .amber-gradient-bg {
   position: absolute;
-  top: -200vh;
+  top: -200dvh;
   right: 0;
   width: 400%;
   height: 400%;

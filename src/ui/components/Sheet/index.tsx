@@ -34,9 +34,9 @@ const Sheet: FunctionComponent<SheetProps> = ({
           } ${open ? 'opacity-30 overlay-show' : 'opacity-0'}`}
         />
         <Dialog.Content
-          className={`fixed left-0 bg-slate-900 w-full h-[98vh] rounded-t-3xl p-6 ${
+          className={`fixed left-0 bg-slate-900 w-full h-[98dvh] rounded-t-3xl p-6 ${
             willClose && 'bottom-sheet-hide'
-          } ${open ? 'bottom-0 bottom-sheet-show' : 'bottom-[-98vh]'}`}
+          } ${open ? 'bottom-0 bottom-sheet-show' : 'bottom-[-98dvh]'}`}
         >
           <div className="mb-2">
             <Dialog.Close asChild>
