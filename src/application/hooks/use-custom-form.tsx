@@ -16,6 +16,7 @@ export default function useCustomForm<T>({
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<FieldValues, T>({ resolver: zodResolver(schema), defaultValues });
 
   return {
@@ -23,5 +24,6 @@ export default function useCustomForm<T>({
     handleSubmit,
     errors,
     reset,
+    watch,
   };
 }

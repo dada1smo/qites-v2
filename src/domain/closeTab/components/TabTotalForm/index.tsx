@@ -19,7 +19,6 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
 }) => {
   const defaultTotal = tab.getTotal() === 0 ? undefined : tab.getTotal();
 
-  const { isKeyboardOpen } = useDetectMobileKeyboard();
   const { control, handleSubmit } = useCustomForm<TabTotalType>({
     schema: TabTotalSchema,
     defaultValues: {
@@ -32,13 +31,6 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
     const value = coerceToNumber(tabTotal);
     setTabTotal(value);
   };
-
-  useEffect(() => {
-    if (isKeyboardOpen === false) {
-      handleSubmit(submit);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isKeyboardOpen]);
 
   return (
     <Form

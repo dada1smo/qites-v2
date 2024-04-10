@@ -64,7 +64,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
   inputMode,
   pattern,
 }) => {
-  const valueSize = value ? value.length : 1;
+  const valueSize = value ? value.length : 4;
 
   return (
     <div className={cn(fieldVariants({ ...fieldProps }))}>
@@ -73,7 +73,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           {label}
         </Typography>
       )}
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         {preffix && (
           <Typography as="span" variant="number">
             {preffix}
@@ -88,7 +88,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           onChange={onChange}
           onBlur={onBlur}
           type={type}
-          className="min-w-12 max-w-28 bg-transparent text-xl leading-6 font-mono font-bold text-teal-600 placeholder:text-teal-800"
+          className="min-w-[1ch] max-w-28 bg-transparent text-xl leading-6 font-mono font-bold text-teal-600 placeholder:text-teal-800"
           step={step}
           inputMode={inputMode}
           pattern={pattern}
