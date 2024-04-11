@@ -9,12 +9,22 @@ import { TabPayerSchema } from './validationSchema';
 import { TabPayerType } from '../../types/TabPayerType';
 import Form from '@/src/ui/components/Form';
 import { FieldValues } from 'react-hook-form';
+import Chip from '@/src/ui/components/Chip';
+import Button from '@/src/ui/components/Button';
 
 interface TabPayerFormProps {
   tab: TabModel;
+  tabPayers: TabPayerType[];
+  addPayer: Function;
+  removePayer: Function;
 }
 
-const TabPayerForm: FunctionComponent<TabPayerFormProps> = ({ tab }) => {
+const TabPayerForm: FunctionComponent<TabPayerFormProps> = ({
+  tab,
+  tabPayers,
+  addPayer,
+  removePayer,
+}) => {
   const { control, handleSubmit, reset } = useCustomForm<TabPayerType>({
     schema: TabPayerSchema,
     defaultValues: {
@@ -22,27 +32,34 @@ const TabPayerForm: FunctionComponent<TabPayerFormProps> = ({ tab }) => {
     },
   });
 
-  const [tabPayers, setTabPayers] = useState<TabPayerType[] | []>([]);
-
   const submit = (data: any) => {
-    setTabPayers((p) => {
-      return [...p, data];
-    });
+    addPayer(data);
     reset();
   };
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-3 items-center">
       {tabPayers.map(({ name }, i) => {
-        return <div key={i}>{name}</div>;
+        return <Chip key={i} label={name} onRemove={() => removePayer(name)} />;
       })}
-      <Form onSubmit={handleSubmit(submit)}>
+      <Form onSubmit={handleSubmit(submit)} className="flex gap-3 items-center">
         <ControlledPillInput
           control={control}
           name="name"
           placeholder="Nome"
           type="text"
-          fieldProps={{ color: 'secondary' }}
+          fieldProps={{ color: 'alt' }}
+          onInputBlur={handleSubmit(submit)}
+          autoFocus
+        />
+        <Button
+          label="Adicionar novo"
+          type="submit"
+          color="basic"
+          shape="circle"
+          size="md"
+          padding="clear"
+          icon={{ src: '/add.svg', position: 'center', size: 24 }}
         />
       </Form>
     </div>

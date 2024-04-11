@@ -17,7 +17,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
   tab,
   setTabTotal,
 }) => {
-  const defaultTotal = tab.getTotal() === 0 ? undefined : tab.getTotal();
+  const defaultTotal = tab.getTotal() === 0 ? '' : tab.getTotal();
 
   const { control, handleSubmit } = useCustomForm<TabTotalType>({
     schema: TabTotalSchema,
@@ -47,6 +47,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
         inputMode="decimal"
         pattern="[0-9]*"
         onInputBlur={handleSubmit(submit)}
+        autoFocus
       />
     </Form>
   );

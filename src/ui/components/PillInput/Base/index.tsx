@@ -13,12 +13,12 @@ export const fieldVariants = cva(
   {
     variants: {
       color: {
-        primary: 'bg-slate-900',
-        secondary: 'bg-teal-900',
+        main: 'bg-slate-900 *:text-teal-600',
+        alt: 'bg-teal-900 *:text-teal-400',
       },
     },
     defaultVariants: {
-      color: 'primary',
+      color: 'main',
     },
   }
 );
@@ -46,6 +46,7 @@ export interface PillInputProps {
     | 'numeric'
     | 'decimal';
   pattern?: string;
+  autoFocus?: boolean;
 }
 
 const PillInput: FunctionComponent<PillInputProps> = ({
@@ -63,6 +64,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
   step,
   inputMode,
   pattern,
+  autoFocus,
 }) => {
   const valueSize = value ? value.length : 4;
 
@@ -88,11 +90,12 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           onChange={onChange}
           onBlur={onBlur}
           type={type}
-          className="min-w-[1ch] max-w-28 bg-transparent text-xl leading-6 font-mono font-bold text-teal-600 placeholder:text-teal-800"
+          className="min-w-[1ch] max-w-28 bg-transparent text-xl leading-6 font-mono font-bold placeholder-inherit placeholder:opacity-70"
           step={step}
           inputMode={inputMode}
           pattern={pattern}
           style={{ width: `${valueSize}ch` }}
+          autoFocus={autoFocus}
         />
       </div>
     </div>

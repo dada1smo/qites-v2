@@ -4,7 +4,7 @@ import { FunctionComponent, MouseEventHandler } from 'react';
 import Image from '../Image';
 import { cn } from '@/src/utils/cn';
 
-const buttonVariants = cva('inline-flex', {
+const buttonVariants = cva('inline-flex items-center justify-center', {
   variants: {
     color: {
       basic: `transparent text-teal-500`,
@@ -12,7 +12,7 @@ const buttonVariants = cva('inline-flex', {
     },
     size: {
       sm: 'text-sm',
-      md: 'text-base',
+      md: 'text-base min-h-[24px] min-w-[24px]',
       lg: 'text-lg',
     },
     padding: {

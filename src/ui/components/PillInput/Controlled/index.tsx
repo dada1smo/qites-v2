@@ -25,6 +25,7 @@ interface ControlledPillInputProps {
     | 'numeric'
     | 'decimal';
   pattern?: string;
+  autoFocus?: boolean;
 }
 
 const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
@@ -41,6 +42,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
   inputMode,
   pattern,
   coerceNumber,
+  autoFocus,
 }) => {
   return (
     <Controller
@@ -83,6 +85,7 @@ const ControlledPillInput: FunctionComponent<ControlledPillInputProps> = ({
           fieldProps={fieldProps}
           inputMode={inputMode}
           pattern={pattern}
+          autoFocus={autoFocus}
         />
       )}
     />
