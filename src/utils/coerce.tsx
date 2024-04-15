@@ -1,4 +1,8 @@
-export function coerceToNumber(value: string) {
+export function coerceToNumber(value: string | number) {
+  if (typeof value === 'number') {
+    return value;
+  }
+
   const split = value.split(',');
 
   if (split.length > 1) {

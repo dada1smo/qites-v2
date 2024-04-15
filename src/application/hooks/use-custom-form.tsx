@@ -17,6 +17,7 @@ export default function useCustomForm<T>({
     formState: { errors },
     reset,
     watch,
+    register,
   } = useForm<FieldValues, T>({ resolver: zodResolver(schema), defaultValues });
 
   return {
@@ -25,5 +26,6 @@ export default function useCustomForm<T>({
     errors,
     reset,
     watch,
+    register,
   };
 }

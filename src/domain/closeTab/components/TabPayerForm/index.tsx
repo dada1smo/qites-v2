@@ -2,13 +2,11 @@
 
 import { FunctionComponent, useState } from 'react';
 import TabModel from '../../models/TabModel';
-import PillInput from '@/src/ui/components/PillInput/Base';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
 import useCustomForm from '@/src/application/hooks/use-custom-form';
 import { TabPayerSchema } from './validationSchema';
 import { TabPayerType } from '../../types/TabPayerType';
 import Form from '@/src/ui/components/Form';
-import { FieldValues } from 'react-hook-form';
 import Chip from '@/src/ui/components/Chip';
 import Button from '@/src/ui/components/Button';
 
@@ -50,7 +48,6 @@ const TabPayerForm: FunctionComponent<TabPayerFormProps> = ({
           type="text"
           fieldProps={{ color: 'alt' }}
           onInputBlur={handleSubmit(submit)}
-          autoFocus
         />
         <Button
           label="Adicionar novo"

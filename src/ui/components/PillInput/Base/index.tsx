@@ -9,16 +9,27 @@ import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/src/utils/cn';
 
 export const fieldVariants = cva(
-  'rounded-3xl py-1 pl-3 pr-3 flex gap-2 w-full justify-between items-center',
+  'rounded-3xl flex gap-2 w-full justify-between items-center',
   {
     variants: {
       color: {
         main: 'bg-slate-900 *:text-teal-600',
         alt: 'bg-teal-900 *:text-teal-400',
+        transparent: 'bg-transparent *:text-teal-400',
+      },
+      padding: {
+        clear: 'py-1 px-0',
+        regular: 'py-1 pl-3 pr-3',
+      },
+      size: {
+        grow: '',
+        full: '[&>div>input]:!w-full [&>div>input]:!max-w-full',
       },
     },
     defaultVariants: {
       color: 'main',
+      padding: 'regular',
+      size: 'grow',
     },
   }
 );
@@ -71,7 +82,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
   return (
     <div className={cn(fieldVariants({ ...fieldProps }))}>
       {label && (
-        <Typography as="p" variant="strong">
+        <Typography as="label" variant="strong">
           {label}
         </Typography>
       )}
@@ -90,7 +101,9 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           onChange={onChange}
           onBlur={onBlur}
           type={type}
-          className="min-w-[1ch] max-w-28 bg-transparent text-xl leading-6 font-mono font-bold placeholder-inherit placeholder:opacity-70"
+          className={
+            'min-w-[1ch] max-w-28 max-h-[24px] bg-transparent text-xl leading-6 font-mono font-bold placeholder-inherit placeholder:opacity-70'
+          }
           step={step}
           inputMode={inputMode}
           pattern={pattern}

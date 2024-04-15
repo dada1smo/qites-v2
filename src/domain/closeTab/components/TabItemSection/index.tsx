@@ -10,13 +10,17 @@ interface TabItemSectionProps {
 
 const TabItemSection: FunctionComponent<TabItemSectionProps> = ({ tab }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [mode, setMode] = useState<'none' | 'add' | 'split'>('none');
 
   return (
     <div className="mt-6 flex flex-col gap-4 overflow-y-auto">
       <ButtonCard
         label="Adicionar consumo"
         iconSrc="/add.svg"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setMode('add');
+          setOpen(true);
+        }}
       />
       <ButtonCard
         label="Dividir restante"
@@ -24,7 +28,8 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({ tab }) => {
         onClick={() => console.log('test')}
       />
       <Sheet open={open} onOpenChange={setOpen}>
-        <TabItemForm tab={tab} />
+        {mode === 'add' && <TabItemForm tab={tab} />}
+        {mode === 'split' && <TabItemForm tab={tab} />}
       </Sheet>
     </div>
   );
