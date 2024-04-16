@@ -3,5 +3,4 @@ export interface TabExpenseType {
   item: string;
   value: string | number;
   quantity: number;
-  type: 'amount' | 'percentage';
 }

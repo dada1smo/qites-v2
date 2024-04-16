@@ -21,15 +21,17 @@ const Chip: FunctionComponent<ChipProps> = ({ label, value, onRemove }) => {
           </Typography>
         )}
       </div>
-      <Button
-        label="Remover"
-        type="button"
-        color="basic"
-        shape="circle"
-        padding="clear"
-        icon={{ src: '/close.svg', position: 'center', size: 24 }}
-        onClick={onRemove}
-      />
+      {onRemove && (
+        <Button
+          label="Remover"
+          type="button"
+          color="basic"
+          shape="circle"
+          padding="clear"
+          icon={{ src: '/close.svg', position: 'center', size: 24 }}
+          onClick={onRemove}
+        />
+      )}
     </div>
   );
 };

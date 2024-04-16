@@ -11,35 +11,33 @@ interface TabItemFormProps {
 }
 
 const TabItemForm: FunctionComponent<TabItemFormProps> = ({ tab }) => {
-  const id = useId();
-
   const { tabPayers, addPayer, removePayer } = useTabPayer();
-  const { tabExpenses, addExpense, removeExpense } = useTabExpense([]);
+  const {
+    tabExpenses,
+    addExpense,
+    removeExpense,
+    addServiceFee,
+    removeServiceFee,
+    serviceFee,
+  } = useTabExpense([]);
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-3">
-        <Typography as="h3" variant="strong">
-          Quem vai pagar?
-        </Typography>
-        <TabPayerForm
-          tab={tab}
-          tabPayers={tabPayers}
-          addPayer={addPayer}
-          removePayer={removePayer}
-        />
-      </div>
-      <div className="flex flex-col gap-3">
-        <Typography as="h3" variant="strong">
-          Pagar o quê?
-        </Typography>
-        <TabExpenseForm
-          tab={tab}
-          tabExpenses={tabExpenses}
-          addExpense={addExpense}
-          removeExpense={removeExpense}
-        />
-      </div>
+      <TabPayerForm
+        tab={tab}
+        tabPayers={tabPayers}
+        addPayer={addPayer}
+        removePayer={removePayer}
+      />
+      <TabExpenseForm
+        tab={tab}
+        tabExpenses={tabExpenses}
+        addExpense={addExpense}
+        removeExpense={removeExpense}
+        serviceFee={serviceFee}
+        addServiceFee={addServiceFee}
+        removeServiceFee={removeServiceFee}
+      />
     </div>
   );
 };
