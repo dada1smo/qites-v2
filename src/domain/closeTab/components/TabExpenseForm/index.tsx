@@ -6,7 +6,6 @@ import { TabExpenseType } from '../../types/TabExpenseType';
 import { TabExpenseSchema } from './validationSchema';
 import Form from '@/src/ui/components/Form';
 import Button from '@/src/ui/components/Button';
-import Chip from '@/src/ui/components/Chip';
 import { coerceToNumber } from '@/src/utils/coerce';
 import { TabServiceFeeType } from '../../types/TabServiceFeeType';
 import { calcServiceFee } from '@/src/utils/calc';

@@ -102,7 +102,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           onBlur={onBlur}
           type={type}
           className={
-            'min-w-[1ch] max-w-28 max-h-[24px] align-middle bg-transparent text-xl leading-6 font-mono font-bold placeholder-inherit placeholder:opacity-70'
+            'min-w-[1ch] max-w-28 max-h-[24px] align-middle bg-transparent text-xl leading-6 font-mono font-bold placeholder-inherit placeholder:opacity-70 p-0'
           }
           step={step}
           inputMode={inputMode}

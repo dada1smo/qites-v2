@@ -1,4 +1,4 @@
-import { FunctionComponent, MouseEventHandler } from 'react';
+import { FunctionComponent } from 'react';
 import Button from '../Button';
 import Typography from '../Typography';
 
