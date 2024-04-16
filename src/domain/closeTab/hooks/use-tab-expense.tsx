@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TabExpenseType } from '../types/TabExpenseType';
 import { TabServiceFeeType } from '../types/TabServiceFeeType';
+import { calcExpenseSum, calcServiceFee } from '@/src/utils/calc';
 
 export default function useTabExpense(expenses?: TabExpenseType[]) {
   const [tabExpenses, setTabExpenses] = useState<TabExpenseType[] | []>(
@@ -24,6 +25,13 @@ export default function useTabExpense(expenses?: TabExpenseType[]) {
     setServiceFee(null);
   }
 
+  function getItemExpenseTotal() {
+    const sumExpenses = calcExpenseSum(tabExpenses);
+    const fee = calcServiceFee(tabExpenses, serviceFee?.percentage);
+
+    return parseFloat((sumExpenses + fee).toFixed(2));
+  }
+
   return {
     tabExpenses,
     addExpense,
@@ -31,5 +39,6 @@ export default function useTabExpense(expenses?: TabExpenseType[]) {
     serviceFee,
     addServiceFee,
     removeServiceFee,
+    getItemExpenseTotal,
   };
 }

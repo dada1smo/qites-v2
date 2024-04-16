@@ -1,3 +1,5 @@
+import { formatCurrency } from '@/src/utils/format';
+
 export default class TabModel {
   private tabTotal: number;
   private tabRemaining: number;
@@ -25,7 +27,7 @@ export default class TabModel {
 
   public getTabSummary() {
     return {
-      tabRemaining: `R$ ${this.tabRemaining.toFixed(2)}`,
+      tabRemaining: formatCurrency(this.tabRemaining),
       tabPayers: this.tabPayers.length,
     };
   }

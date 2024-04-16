@@ -5,28 +5,19 @@ import Button from '../Button/index';
 
 interface SheetProps {
   open: boolean;
-  onOpenChange: (open: boolean) => void;
+  willClose: boolean;
+  closeSheet: (open: boolean) => void;
   children: ReactNode;
 }
 
 const Sheet: FunctionComponent<SheetProps> = ({
   open,
-  onOpenChange,
+  willClose,
+  closeSheet,
   children,
 }) => {
-  const [willClose, setWillClose] = useState<boolean>(false);
-
-  const handleClose = (openEvent: boolean) => {
-    setWillClose(!openEvent);
-
-    setTimeout(() => {
-      onOpenChange(openEvent);
-      return setWillClose(false);
-    }, 200);
-  };
-
   return (
-    <Dialog.Root defaultOpen={false} open={open} onOpenChange={handleClose}>
+    <Dialog.Root defaultOpen={false} open={open} onOpenChange={closeSheet}>
       <Dialog.Portal>
         <Dialog.Overlay
           className={`fixed top-0 left-0 h-[100dvh] w-screen bg-slate-900 ${

@@ -12,11 +12,15 @@ const Chip: FunctionComponent<ChipProps> = ({ label, value, onRemove }) => {
   return (
     <div className="flex items-center py-1 px-3 bg-slate-700 rounded-3xl gap-2 justify-between">
       <div className="flex flex-col justify-between w-full overflow-hidden">
-        <Typography as="span" variant="p" className="truncate overflow-hidden">
+        <Typography
+          as="span"
+          variant="small"
+          className="truncate overflow-hidden"
+        >
           {label}
         </Typography>
         {value && (
-          <Typography as="span" variant="number" className="text-slate-300">
+          <Typography as="span" variant="small" className="font-mono font-bold">
             {value}
           </Typography>
         )}

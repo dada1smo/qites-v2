@@ -11,6 +11,9 @@ import { coerceToNumber } from '@/src/utils/coerce';
 import { TabServiceFeeType } from '../../types/TabServiceFeeType';
 import { calcServiceFee } from '@/src/utils/calc';
 import Typography from '@/src/ui/components/Typography';
+import { ListItemProps } from '@/src/ui/components/ListItem';
+import List from '@/src/ui/components/List';
+import { formatCurrency } from '@/src/utils/format';
 
 interface TabExpenseFormProps {
   tab: TabModel;
@@ -20,6 +23,7 @@ interface TabExpenseFormProps {
   serviceFee: TabServiceFeeType | null;
   addServiceFee: Function;
   removeServiceFee: Function;
+  getItemExpenseTotal: Function;
 }
 
 const TabExpenseForm: FunctionComponent<TabExpenseFormProps> = ({
@@ -30,6 +34,7 @@ const TabExpenseForm: FunctionComponent<TabExpenseFormProps> = ({
   serviceFee,
   addServiceFee,
   removeServiceFee,
+  getItemExpenseTotal,
 }) => {
   const { control, register, handleSubmit, reset } =
     useCustomForm<TabExpenseType>({
@@ -61,26 +66,35 @@ const TabExpenseForm: FunctionComponent<TabExpenseFormProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <Typography as="h3" variant="strong">
-        Pagar o quê?
-      </Typography>
-      <div className="flex flex-col gap-2">
-        {tabExpenses.map(({ item, quantity, value, id }) => {
-          return (
-            <Chip
-              key={id}
-              label={`${item}`}
-              value={`(x${quantity}) R$ ${coerceToNumber(value) * quantity}`}
-              onRemove={() => removeExpense(id)}
-            />
-          );
-        })}
+    <div className="flex flex-col gap-3 overflow-hidden">
+      <div className="flex justify-between">
+        <Typography as="h3" variant="strong">
+          Pagar o quê?
+        </Typography>
+        {getItemExpenseTotal() > 0 && (
+          <Typography as="p" variant="number">
+            {formatCurrency(getItemExpenseTotal())}
+          </Typography>
+        )}
+      </div>
+      <div className="flex flex-col gap-2 overflow-y-auto">
+        <List
+          data={tabExpenses}
+          transformData={handleExpensesList}
+          onRemove={removeExpense}
+        />
         {serviceFee && (
-          <Chip
-            label={serviceFee.item}
-            value={`R$ ${calcServiceFee(serviceFee.percentage, tabExpenses)}`}
-            onRemove={() => removeServiceFee()}
+          <List
+            data={[
+              {
+                id: 'percentage',
+                item: serviceFee?.item,
+                value: formatCurrency(
+                  calcServiceFee(tabExpenses, serviceFee?.percentage)
+                ),
+                onRemove: () => removeServiceFee(),
+              },
+            ]}
           />
         )}
         <Form
@@ -151,3 +165,14 @@ const TabExpenseForm: FunctionComponent<TabExpenseFormProps> = ({
 };
 
 export default TabExpenseForm;
+
+function handleExpensesList(expenses: TabExpenseType[]): ListItemProps[] {
+  return expenses.map(({ item, quantity, value, id }) => {
+    return {
+      item: item,
+      id: id,
+      value: formatCurrency(coerceToNumber(value) * quantity),
+      details: `${formatCurrency(value)} x ${quantity}`,
+    };
+  });
+}

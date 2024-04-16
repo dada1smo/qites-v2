@@ -14,6 +14,8 @@ const typographyVariants = cva('font-sans', {
       p: 'text-lg leading-6 text-slate-300',
       link: 'text-base underline',
       number: 'text-xl leading-6 font-mono font-bold text-teal-600',
+      small: 'text-md leading-6 text-slate-300',
+      extraSmall: 'text-xs leading-5 text-slate-300',
     },
     align: {
       center: 'text-center',

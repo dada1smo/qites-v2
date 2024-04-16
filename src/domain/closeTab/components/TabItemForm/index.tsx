@@ -5,12 +5,17 @@ import TabPayerForm from '../TabPayerForm';
 import useTabPayer from '../../hooks/use-tab-payer';
 import TabExpenseForm from '../TabExpenseForm';
 import useTabExpense from '../../hooks/use-tab-expense';
+import TabItemOptions from '../TabItemOptions';
 
 interface TabItemFormProps {
   tab: TabModel;
+  closeSheet: Function;
 }
 
-const TabItemForm: FunctionComponent<TabItemFormProps> = ({ tab }) => {
+const TabItemForm: FunctionComponent<TabItemFormProps> = ({
+  tab,
+  closeSheet,
+}) => {
   const { tabPayers, addPayer, removePayer } = useTabPayer();
   const {
     tabExpenses,
@@ -19,10 +24,11 @@ const TabItemForm: FunctionComponent<TabItemFormProps> = ({ tab }) => {
     addServiceFee,
     removeServiceFee,
     serviceFee,
+    getItemExpenseTotal,
   } = useTabExpense([]);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 relative pb-[100px] max-h-full h-full overflow-hidden">
       <TabPayerForm
         tab={tab}
         tabPayers={tabPayers}
@@ -37,6 +43,11 @@ const TabItemForm: FunctionComponent<TabItemFormProps> = ({ tab }) => {
         serviceFee={serviceFee}
         addServiceFee={addServiceFee}
         removeServiceFee={removeServiceFee}
+        getItemExpenseTotal={getItemExpenseTotal}
+      />
+      <TabItemOptions
+        getItemExpenseTotal={getItemExpenseTotal}
+        closeSheet={closeSheet}
       />
     </div>
   );
