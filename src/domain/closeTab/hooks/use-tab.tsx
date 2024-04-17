@@ -14,6 +14,13 @@ export default function useTab() {
         .duplicate(t)
         .setTotal(total)
         .setId(crypto.randomUUID());
+
+      const id = update.getId();
+
+      if (id) {
+        addToLocalStorage('qites-tab', update.toJson());
+      }
+
       return update;
     });
   }
@@ -21,12 +28,6 @@ export default function useTab() {
   function addTabItem(item: TabItemType) {
     return setTab((t) => {
       const update = new TabModel().duplicate(t).addItem(item);
-      const id = update.getId();
-
-      if (id) {
-        addToLocalStorage(id, update.toJson());
-      }
-
       return update;
     });
   }

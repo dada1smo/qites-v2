@@ -1,15 +1,13 @@
 import useCustomForm from '@/src/application/hooks/use-custom-form';
-import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { TabTotalSchema } from './validationSchema';
 import { TabTotalType } from '../../types/TabTotalType';
 import Form from '@/src/ui/components/Form';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
 import TabModel from '../../models/TabModel';
-import useDetectMobileKeyboard from '@/src/ui/hooks/use-detect-mobile-keyboard';
 import { coerceToNumber } from '@/src/utils/coerce';
 import ButtonCard from '@/src/ui/components/ButtonCard';
 import Button from '@/src/ui/components/Button';
-import SummaryItem from '@/src/ui/components/SummaryItem';
 import { formatCurrency } from '@/src/utils/format';
 import Typography from '@/src/ui/components/Typography';
 

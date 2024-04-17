@@ -6,15 +6,10 @@ import { calcExpenseSumServiceFee } from '@/src/utils/calc';
 export default class TabModel {
   private tabId: string | undefined;
   private tabTotal: number;
-  private tabRemaining: number;
   private tabItems: TabItemType[];
-
-  private tabPayers: TabPayerType[];
 
   constructor() {
     this.tabTotal = 0;
-    this.tabRemaining = 0;
-    this.tabPayers = [];
     this.tabItems = [];
   }
 
@@ -34,14 +29,12 @@ export default class TabModel {
   public duplicate(tab: TabModel) {
     this.tabId = tab.getId();
     this.tabTotal = tab.getTotal();
-    this.tabRemaining = tab.getRemaining();
     this.tabItems = tab.getItems();
     return this;
   }
 
   public setTotal(total: number) {
     this.tabTotal = parseFloat(total.toFixed(2));
-    this.tabRemaining = parseFloat(total.toFixed(2));
     return this;
   }
 
@@ -49,20 +42,46 @@ export default class TabModel {
     return parseFloat(this.tabTotal.toFixed(2));
   }
 
+  public calcRemainder() {
+    const itemsTotal = this.tabItems.map((item) =>
+      calcExpenseSumServiceFee(item.expenses, item.serviceFee?.percentage)
+    );
+    const sum = parseFloat(
+      itemsTotal
+        .reduce((value, current) => value - current, this.tabTotal)
+        .toFixed(2)
+    );
+    return sum;
+  }
+
   public getRemaining() {
-    return this.tabRemaining;
+    return this.calcRemainder();
+  }
+
+  public getUniquePayers() {
+    const payers = this.tabItems
+      .map(({ payers }) => payers.map(({ name }) => name))
+      .flat();
+    const unique = new Set(payers);
+    return Array.from(unique);
   }
 
   public getTabSummary() {
+    const payersLength = this.getUniquePayers().length;
+    const variableWord = payersLength > 1 ? 'pessoas' : 'pessoa';
+
     return {
-      tabRemaining: formatCurrency(this.tabRemaining),
-      tabPayers: this.tabPayers.length,
+      tabRemaining: formatCurrency(this.calcRemainder()),
+      tabPayers: `${
+        payersLength > 0 ? `${payersLength} ${variableWord}` : 'Ninguém ainda'
+      }`,
     };
   }
 
   public addItem(item: TabItemType) {
     const items = [...this.tabItems, item];
     this.tabItems = items;
+    this.calcRemainder();
     return this;
   }
 
