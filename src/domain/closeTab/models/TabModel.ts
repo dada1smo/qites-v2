@@ -2,15 +2,18 @@ import { formatCurrency } from '@/src/utils/format';
 import { TabPayerType } from '../types/TabPayerType';
 import { TabItemType } from '../types/TabItemType';
 import { calcExpenseSumServiceFee } from '@/src/utils/calc';
+import { TabItemFormType } from '../types/TabItemFormTypes';
 
 export default class TabModel {
   private tabId: string | undefined;
   private tabTotal: number;
   private tabItems: TabItemType[];
+  private tabSplit: TabPayerType[];
 
   constructor() {
     this.tabTotal = 0;
     this.tabItems = [];
+    this.tabSplit = [];
   }
 
   public setId(id: string) {
@@ -30,6 +33,7 @@ export default class TabModel {
     this.tabId = tab.getId();
     this.tabTotal = tab.getTotal();
     this.tabItems = tab.getItems();
+    this.tabSplit = tab.getSplit();
     return this;
   }
 
@@ -58,6 +62,10 @@ export default class TabModel {
     return this.calcRemainder();
   }
 
+  public getRemainderCurrency() {
+    return formatCurrency(parseFloat(this.getRemaining().toFixed(2)));
+  }
+
   public getUniquePayers() {
     const payers = this.tabItems
       .map(({ payers }) => payers.map(({ name }) => name))
@@ -69,9 +77,10 @@ export default class TabModel {
   public getTabSummary() {
     const payersLength = this.getUniquePayers().length;
     const variableWord = payersLength > 1 ? 'pessoas' : 'pessoa';
+    const remainder = this.tabSplit.length > 0 ? 0 : this.calcRemainder();
 
     return {
-      tabRemaining: formatCurrency(this.calcRemainder()),
+      tabRemaining: formatCurrency(remainder),
       tabPayers: `${
         payersLength > 0 ? `${payersLength} ${variableWord}` : 'Ninguém ainda'
       }`,
@@ -115,6 +124,33 @@ export default class TabModel {
     };
   }
 
+  public getItemDataByMode(mode: TabItemFormType, itemId?: string) {
+    if (mode === 'edit') {
+      return this.findItem(itemId);
+    }
+
+    if (mode === 'split') {
+      const payers =
+        this.tabSplit.length > 0
+          ? this.tabSplit
+          : this.getUniquePayers().map((p) => {
+              return { name: p };
+            });
+
+      return {
+        payers: payers,
+        expenses: [],
+        serviceFee: null,
+      };
+    }
+
+    return {
+      payers: [],
+      expenses: [],
+      serviceFee: null,
+    };
+  }
+
   public getItemsSummary() {
     const items = this.tabItems.map(({ id, payers, expenses, serviceFee }) => {
       return {
@@ -133,11 +169,44 @@ export default class TabModel {
     return items;
   }
 
+  public setSplitPayers(payers: TabPayerType[]) {
+    this.tabSplit = payers;
+
+    return this;
+  }
+
+  public getSplit() {
+    return this.tabSplit;
+  }
+
+  public getSplitSummary() {
+    return {
+      payers: `(Restante) ${this.tabSplit.map(({ name }) => name).join(', ')}`,
+      value: this.getRemainderCurrency(),
+    };
+  }
+
   public toJson() {
     return JSON.stringify({
       id: this.tabId,
       total: this.tabTotal,
       items: this.tabItems,
+      split: this.tabSplit,
     });
+  }
+
+  public toClass(tab: string | null) {
+    if (!tab) {
+      return this;
+    }
+
+    const json = JSON.parse(tab);
+    console.log(json);
+    this.tabId = json.id;
+    this.tabTotal = json.total;
+    this.tabItems = json.items;
+    this.tabSplit = json.split;
+
+    return this;
   }
 }

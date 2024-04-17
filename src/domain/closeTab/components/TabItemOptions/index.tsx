@@ -5,14 +5,14 @@ import { FunctionComponent } from 'react';
 interface TabItemOptionsProps {
   getItemExpenseTotal?: Function;
   closeSheet: Function;
-  handleAddItem: Function;
+  handleSave: Function;
   enableSave: () => boolean;
 }
 
 const TabItemOptions: FunctionComponent<TabItemOptionsProps> = ({
   getItemExpenseTotal,
   closeSheet,
-  handleAddItem,
+  handleSave,
   enableSave,
 }) => {
   return (
@@ -31,7 +31,7 @@ const TabItemOptions: FunctionComponent<TabItemOptionsProps> = ({
             type="button"
             color="main"
             padding="regular"
-            onClick={() => handleAddItem()}
+            onClick={() => handleSave()}
             disabled={!enableSave()}
           />
         </div>

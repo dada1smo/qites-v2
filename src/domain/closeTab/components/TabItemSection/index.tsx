@@ -10,11 +10,13 @@ import { TabItemFormType } from '../../types/TabItemFormTypes';
 interface TabItemSectionProps {
   tab: TabModel;
   addTabItem: Function;
+  splitTabRemainder: Function;
 }
 
 const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
   tab,
   addTabItem,
+  splitTabRemainder,
 }) => {
   const { open, willClose, openSheet, closeSheet } = useSheet();
 
@@ -27,18 +29,35 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
     openSheet();
   };
 
+  const handleEditSplit = () => {
+    setMode('split');
+    openSheet();
+  };
+
   return (
     <div className="mt-4 flex flex-col gap-4 overflow-y-auto">
-      <List
-        data={tab.getItemsSummary().map(({ id, payers, value }) => {
-          return {
-            id: id,
-            item: payers,
-            value: value,
-            onEdit: () => handleEditItem(id),
-          };
-        })}
-      />
+      <div>
+        <List
+          data={tab.getItemsSummary().map(({ id, payers, value }) => {
+            return {
+              id: id,
+              item: payers,
+              value: value,
+              onEdit: () => handleEditItem(id),
+            };
+          })}
+        />
+        <List
+          data={[
+            {
+              id: 'remainder',
+              item: tab.getSplitSummary().payers,
+              value: tab.getSplitSummary().value,
+              onEdit: () => handleEditSplit(),
+            },
+          ]}
+        />
+      </div>
       <ButtonCard
         label="Adicionar consumo"
         iconSrc="/add.svg"
@@ -47,34 +66,25 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
           openSheet();
         }}
       />
-      <ButtonCard
-        label="Dividir restante"
-        iconSrc="/add.svg"
-        onClick={() => console.log('test')}
-      />
+      {tab.getSplit().length === 0 && (
+        <ButtonCard
+          label="Pagar restante"
+          iconSrc="/add.svg"
+          onClick={() => {
+            setMode('split');
+            openSheet();
+          }}
+        />
+      )}
       <Sheet open={open} willClose={willClose} closeSheet={closeSheet}>
-        {mode === 'add' && (
-          <TabItemForm
-            tab={tab}
-            addTabItem={addTabItem}
-            closeSheet={closeSheet}
-          />
-        )}
-        {mode === 'edit' && (
-          <TabItemForm
-            tab={tab}
-            addTabItem={addTabItem}
-            closeSheet={closeSheet}
-            selectedId={selectedId}
-          />
-        )}
-        {mode === 'split' && (
-          <TabItemForm
-            tab={tab}
-            addTabItem={addTabItem}
-            closeSheet={closeSheet}
-          />
-        )}
+        <TabItemForm
+          tab={tab}
+          addTabItem={addTabItem}
+          closeSheet={closeSheet}
+          selectedId={selectedId}
+          splitTabRemainder={splitTabRemainder}
+          mode={mode}
+        />
       </Sheet>
     </div>
   );

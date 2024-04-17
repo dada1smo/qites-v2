@@ -7,12 +7,16 @@ import TabExpenseForm from '../TabExpenseForm';
 import useTabExpense from '../../hooks/use-tab-expense';
 import TabItemOptions from '../TabItemOptions';
 import { TabItemType } from '../../types/TabItemType';
+import { TabItemFormType } from '../../types/TabItemFormTypes';
+import TabSplitRemainder from '../TabSplitRemainder';
 
 interface TabItemFormProps {
   tab: TabModel;
   addTabItem: Function;
   closeSheet: Function;
   selectedId?: string;
+  mode: TabItemFormType;
+  splitTabRemainder: Function;
 }
 
 const TabItemForm: FunctionComponent<TabItemFormProps> = ({
@@ -20,8 +24,13 @@ const TabItemForm: FunctionComponent<TabItemFormProps> = ({
   addTabItem,
   closeSheet,
   selectedId,
+  mode,
+  splitTabRemainder,
 }) => {
-  const { payers, expenses, serviceFee } = tab.findItem(selectedId);
+  const { payers, expenses, serviceFee } = tab.getItemDataByMode(
+    mode,
+    selectedId
+  );
   const { tabPayers, addPayer, removePayer } = useTabPayer(payers);
   const {
     tabExpenses,
@@ -44,12 +53,17 @@ const TabItemForm: FunctionComponent<TabItemFormProps> = ({
     closeSheet();
   };
 
+  const handleSplitRemainder = () => {
+    splitTabRemainder(tabPayers);
+    closeSheet();
+  };
+
   const enableSave = () => {
     if (tabPayers.length === 0) {
       return false;
     }
 
-    if (tabExpenses.length === 0) {
+    if (mode !== 'split' && tabExpenses.length === 0) {
       return false;
     }
 
@@ -63,23 +77,39 @@ const TabItemForm: FunctionComponent<TabItemFormProps> = ({
         tabPayers={tabPayers}
         addPayer={addPayer}
         removePayer={removePayer}
+        mode={mode}
       />
-      <TabExpenseForm
-        tab={tab}
-        tabExpenses={tabExpenses}
-        addExpense={addExpense}
-        removeExpense={removeExpense}
-        itemServiceFee={itemServiceFee}
-        addServiceFee={addServiceFee}
-        removeServiceFee={removeServiceFee}
-        getItemExpenseTotal={getItemExpenseTotal}
-      />
-      <TabItemOptions
-        getItemExpenseTotal={getItemExpenseTotal}
-        closeSheet={closeSheet}
-        handleAddItem={handleAddItem}
-        enableSave={enableSave}
-      />
+      {(mode === 'add' || mode === 'edit') && (
+        <>
+          <TabExpenseForm
+            tab={tab}
+            tabExpenses={tabExpenses}
+            addExpense={addExpense}
+            removeExpense={removeExpense}
+            itemServiceFee={itemServiceFee}
+            addServiceFee={addServiceFee}
+            removeServiceFee={removeServiceFee}
+            getItemExpenseTotal={getItemExpenseTotal}
+          />
+          <TabItemOptions
+            getItemExpenseTotal={getItemExpenseTotal}
+            closeSheet={closeSheet}
+            handleSave={handleAddItem}
+            enableSave={enableSave}
+          />
+        </>
+      )}
+      {mode === 'split' && (
+        <>
+          <TabSplitRemainder tab={tab} tabPayers={tabPayers} />
+          <TabItemOptions
+            getItemExpenseTotal={getItemExpenseTotal}
+            closeSheet={closeSheet}
+            handleSave={handleSplitRemainder}
+            enableSave={enableSave}
+          />
+        </>
+      )}
     </div>
   );
 };
