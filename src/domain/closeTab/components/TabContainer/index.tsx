@@ -7,12 +7,12 @@ import TabItemSection from '../TabItemSection';
 import TabSummarySection from '../TabSummarySection';
 
 const TabContainer: FunctionComponent = () => {
-  const { tab, setTabTotal } = useTab();
+  const { tab, setTabTotal, addTabItem } = useTab();
 
   return (
     <div className="mt-4 mb-[160px]">
       <TabTotalForm tab={tab} setTabTotal={setTabTotal} />
-      <TabItemSection tab={tab} />
+      <TabItemSection tab={tab} addTabItem={addTabItem} />
       <TabSummarySection tab={tab} />
     </div>
   );

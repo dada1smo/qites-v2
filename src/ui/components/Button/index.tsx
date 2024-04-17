@@ -27,12 +27,17 @@ const buttonVariants = cva(
         rounded: 'rounded-3xl',
         circle: 'rounde-full',
       },
+      disabled: {
+        true: 'opacity-50',
+        false: 'opacity-100',
+      },
     },
     defaultVariants: {
       color: 'basic',
       size: 'md',
       padding: 'regular',
       shape: 'rounded',
+      disabled: false,
     },
   }
 );
@@ -49,6 +54,7 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
     size: number;
   };
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -61,8 +67,11 @@ const Button: FunctionComponent<ButtonProps> = ({
   size,
   padding,
   shape,
+  disabled,
 }) => {
-  const buttonClasses = cn(buttonVariants({ color, size, padding, shape }));
+  const buttonClasses = cn(
+    buttonVariants({ color, size, padding, shape, disabled })
+  );
 
   const iconComponent = (position: string) => {
     let classes;
@@ -100,7 +109,12 @@ const Button: FunctionComponent<ButtonProps> = ({
       {icon && icon.position === 'after' && iconComponent(icon.position)}
     </NextLink>
   ) : (
-    <button className={buttonClasses} onClick={onClick} type={type}>
+    <button
+      className={buttonClasses}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {icon && icon.position === 'before' && iconComponent(icon.position)}
       {icon && icon.position === 'center'
         ? iconComponent(icon.position)

@@ -25,3 +25,13 @@ export function calcServiceFee(
 
   return fee;
 }
+
+export function calcExpenseSumServiceFee(
+  expenses: TabExpenseType[],
+  percentage?: number
+) {
+  const expenseTotal = calcExpenseSum(expenses);
+  const serviceFee = calcServiceFee(expenses, percentage);
+
+  return expenseTotal + serviceFee;
+}

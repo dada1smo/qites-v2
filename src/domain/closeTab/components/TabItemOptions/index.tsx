@@ -5,11 +5,15 @@ import { FunctionComponent } from 'react';
 interface TabItemOptionsProps {
   getItemExpenseTotal?: Function;
   closeSheet: Function;
+  handleAddItem: Function;
+  enableSave: () => boolean;
 }
 
 const TabItemOptions: FunctionComponent<TabItemOptionsProps> = ({
   getItemExpenseTotal,
   closeSheet,
+  handleAddItem,
+  enableSave,
 }) => {
   return (
     <div className="absolute bottom-0 left-0 w-full py-4 h-[96px] bg-slate-900 rounded-3xl">
@@ -22,7 +26,14 @@ const TabItemOptions: FunctionComponent<TabItemOptionsProps> = ({
             padding="regular"
             onClick={() => closeSheet(false)}
           />
-          <Button label="Salvar" type="button" color="main" padding="regular" />
+          <Button
+            label="Salvar"
+            type="button"
+            color="main"
+            padding="regular"
+            onClick={() => handleAddItem()}
+            disabled={!enableSave()}
+          />
         </div>
       </div>
     </div>

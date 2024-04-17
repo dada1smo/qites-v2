@@ -13,9 +13,9 @@ export const fieldVariants = cva(
   {
     variants: {
       color: {
-        main: 'bg-slate-900 *:text-teal-600',
-        alt: 'bg-teal-900 *:text-teal-400',
-        transparent: 'bg-transparent *:text-teal-400',
+        main: 'bg-slate-900 [&>div>input]:text-teal-600',
+        alt: 'bg-teal-900 [&>div>input]:text-teal-400',
+        transparent: 'bg-transparent [&>div>input]:text-teal-400',
       },
       padding: {
         clear: 'py-1 px-0',

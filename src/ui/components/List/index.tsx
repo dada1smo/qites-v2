@@ -4,12 +4,14 @@ import ListItem, { ListItemProps } from '../ListItem';
 interface ListProps {
   data: ListItemProps[] | any[];
   onRemove?: Function;
+  onEdit?: Function;
   transformData?: (data: any[]) => ListItemProps[];
 }
 
 const List: FunctionComponent<ListProps> = ({
   data,
   onRemove,
+  onEdit,
   transformData,
 }) => {
   const items = transformData ? transformData(data) : data;
@@ -17,7 +19,7 @@ const List: FunctionComponent<ListProps> = ({
   return (
     <ul>
       {items.map((item) => (
-        <ListItem key={item.id} onRemove={onRemove} {...item} />
+        <ListItem key={item.id} onRemove={onRemove} onEdit={onEdit} {...item} />
       ))}
     </ul>
   );
