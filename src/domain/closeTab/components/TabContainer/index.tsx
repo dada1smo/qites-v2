@@ -12,7 +12,9 @@ const TabContainer: FunctionComponent = () => {
   return (
     <div className="mt-4 mb-[160px]">
       <TabTotalForm tab={tab} setTabTotal={setTabTotal} />
-      <TabItemSection tab={tab} addTabItem={addTabItem} />
+      {tab.getTotal() > 0 && (
+        <TabItemSection tab={tab} addTabItem={addTabItem} />
+      )}
       <TabSummarySection tab={tab} />
     </div>
   );
