@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { TabPayerType } from '../types/TabPayerType';
 
-export default function useTabPayer() {
-  const [tabPayers, setTabPayers] = useState<TabPayerType[] | []>([]);
+export default function useTabPayer(payers: TabPayerType[] | []) {
+  const [tabPayers, setTabPayers] = useState<TabPayerType[] | []>(payers);
 
   function addPayer(data: TabPayerType) {
     setTabPayers((p) => {

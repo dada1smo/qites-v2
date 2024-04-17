@@ -79,14 +79,40 @@ export default class TabModel {
   }
 
   public addItem(item: TabItemType) {
-    const items = [...this.tabItems, item];
+    const find = this.tabItems.find(({ id }) => id === item.id);
+    const update = this.tabItems.map((i) => {
+      if (i.id === item.id) {
+        return {
+          ...item,
+        };
+      }
+      return i;
+    });
+    const items = find ? update : [...update, item];
     this.tabItems = items;
-    this.calcRemainder();
     return this;
   }
 
   public getItems() {
     return this.tabItems;
+  }
+
+  public findItem(itemId?: string) {
+    const find = this.tabItems.find(({ id }) => id === itemId);
+
+    if (!itemId || !find) {
+      return {
+        payers: [],
+        expenses: [],
+        serviceFee: null,
+      };
+    }
+
+    return {
+      payers: find.payers,
+      expenses: find.expenses,
+      serviceFee: find.serviceFee,
+    };
   }
 
   public getItemsSummary() {

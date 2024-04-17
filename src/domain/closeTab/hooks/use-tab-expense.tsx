@@ -7,11 +7,15 @@ import {
   calcServiceFee,
 } from '@/src/utils/calc';
 
-export default function useTabExpense(expenses?: TabExpenseType[]) {
+export default function useTabExpense(
+  expenses: TabExpenseType[] | [],
+  serviceFee: TabServiceFeeType | null
+) {
   const [tabExpenses, setTabExpenses] = useState<TabExpenseType[] | []>(
-    expenses || []
+    expenses
   );
-  const [serviceFee, setServiceFee] = useState<TabServiceFeeType | null>(null);
+  const [itemServiceFee, setItemServiceFee] =
+    useState<TabServiceFeeType | null>(serviceFee);
 
   function addExpense(data: TabExpenseType) {
     setTabExpenses((e) => [...e, data]);
@@ -22,16 +26,18 @@ export default function useTabExpense(expenses?: TabExpenseType[]) {
   }
 
   function addServiceFee(data: TabServiceFeeType) {
-    setServiceFee(data);
+    setItemServiceFee(data);
   }
 
   function removeServiceFee() {
-    setServiceFee(null);
+    setItemServiceFee(null);
   }
 
   function getItemExpenseTotal() {
     return parseFloat(
-      calcExpenseSumServiceFee(tabExpenses, serviceFee?.percentage).toFixed(2)
+      calcExpenseSumServiceFee(tabExpenses, itemServiceFee?.percentage).toFixed(
+        2
+      )
     );
   }
 
@@ -39,7 +45,7 @@ export default function useTabExpense(expenses?: TabExpenseType[]) {
     tabExpenses,
     addExpense,
     removeExpense,
-    serviceFee,
+    itemServiceFee,
     addServiceFee,
     removeServiceFee,
     getItemExpenseTotal,

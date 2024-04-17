@@ -19,7 +19,7 @@ interface TabExpenseFormProps {
   tabExpenses: TabExpenseType[];
   addExpense: Function;
   removeExpense: Function;
-  serviceFee: TabServiceFeeType | null;
+  itemServiceFee: TabServiceFeeType | null;
   addServiceFee: Function;
   removeServiceFee: Function;
   getItemExpenseTotal: Function;
@@ -30,7 +30,7 @@ const TabExpenseForm: FunctionComponent<TabExpenseFormProps> = ({
   tabExpenses,
   addExpense,
   removeExpense,
-  serviceFee,
+  itemServiceFee,
   addServiceFee,
   removeServiceFee,
   getItemExpenseTotal,
@@ -82,14 +82,14 @@ const TabExpenseForm: FunctionComponent<TabExpenseFormProps> = ({
           transformData={handleExpensesList}
           onRemove={removeExpense}
         />
-        {serviceFee && (
+        {itemServiceFee && (
           <List
             data={[
               {
                 id: 'percentage',
-                item: serviceFee?.item,
+                item: itemServiceFee?.item,
                 value: formatCurrency(
-                  calcServiceFee(tabExpenses, serviceFee?.percentage)
+                  calcServiceFee(tabExpenses, itemServiceFee?.percentage)
                 ),
                 onRemove: () => removeServiceFee(),
               },
@@ -146,7 +146,7 @@ const TabExpenseForm: FunctionComponent<TabExpenseFormProps> = ({
             icon={{ src: '/add.svg', position: 'center', size: 24 }}
           />
         </Form>
-        {!serviceFee && (
+        {!itemServiceFee && (
           <div className="mt-2">
             <Button
               label="Adicionar 10%"

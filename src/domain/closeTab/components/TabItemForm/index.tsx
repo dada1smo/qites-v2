@@ -12,30 +12,33 @@ interface TabItemFormProps {
   tab: TabModel;
   addTabItem: Function;
   closeSheet: Function;
+  selectedId?: string;
 }
 
 const TabItemForm: FunctionComponent<TabItemFormProps> = ({
   tab,
   addTabItem,
   closeSheet,
+  selectedId,
 }) => {
-  const { tabPayers, addPayer, removePayer } = useTabPayer();
+  const { payers, expenses, serviceFee } = tab.findItem(selectedId);
+  const { tabPayers, addPayer, removePayer } = useTabPayer(payers);
   const {
     tabExpenses,
     addExpense,
     removeExpense,
     addServiceFee,
     removeServiceFee,
-    serviceFee,
+    itemServiceFee,
     getItemExpenseTotal,
-  } = useTabExpense([]);
+  } = useTabExpense(expenses, serviceFee);
 
   const handleAddItem = () => {
     const item: TabItemType = {
-      id: crypto.randomUUID(),
+      id: selectedId ? selectedId : crypto.randomUUID(),
       expenses: tabExpenses,
       payers: tabPayers,
-      serviceFee: serviceFee,
+      serviceFee: itemServiceFee,
     };
     addTabItem(item);
     closeSheet();
@@ -66,7 +69,7 @@ const TabItemForm: FunctionComponent<TabItemFormProps> = ({
         tabExpenses={tabExpenses}
         addExpense={addExpense}
         removeExpense={removeExpense}
-        serviceFee={serviceFee}
+        itemServiceFee={itemServiceFee}
         addServiceFee={addServiceFee}
         removeServiceFee={removeServiceFee}
         getItemExpenseTotal={getItemExpenseTotal}
