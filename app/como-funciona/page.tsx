@@ -53,8 +53,8 @@ const About: FunctionComponent = () => {
       </div>
       <Typography
         as="p"
-        variant="p"
-        className="font-mono border-dotted border-t-2 border-t-teal-900"
+        variant="small"
+        className="font-mono border-dotted border-t-2 border-t-teal-900 text-center"
       >
         desenvolvido por{' '}
         <Button
