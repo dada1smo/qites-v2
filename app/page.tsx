@@ -39,6 +39,7 @@ export default function Home() {
           size="md"
           link={{
             href: 'https://github.com/dada1smo',
+            target: '_blank',
           }}
         />
       </Typography>

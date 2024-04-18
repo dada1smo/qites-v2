@@ -47,6 +47,7 @@ const About: FunctionComponent = () => {
             size="md"
             link={{
               href: 'https://github.com/dada1smo/qites-v2',
+              target: '_blank',
             }}
           />
         </Typography>
@@ -65,6 +66,7 @@ const About: FunctionComponent = () => {
           size="md"
           link={{
             href: 'https://github.com/dada1smo',
+            target: '_blank',
           }}
         />
       </Typography>

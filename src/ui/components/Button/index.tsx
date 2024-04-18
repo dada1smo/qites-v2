@@ -53,6 +53,7 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
   link?: {
     href: string;
     onLinkClick?: MouseEventHandler<HTMLAnchorElement>;
+    target?: string;
   };
   icon?: {
     src: string;
@@ -112,6 +113,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       href={link.href}
       className={buttonClasses}
       onClick={link.onLinkClick}
+      target={link.target}
     >
       {icon && icon.position === 'before' && iconComponent(icon.position)}
       {icon && icon.position === 'center'
