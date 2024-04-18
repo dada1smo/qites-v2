@@ -71,7 +71,7 @@ const TabItemForm: FunctionComponent<TabItemFormProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-6 relative pb-[100px] max-h-full h-full overflow-hidden">
+    <div className="flex flex-col gap-6 relative pb-[160px] max-h-full h-full overflow-hidden">
       <TabPayerForm
         tab={tab}
         tabPayers={tabPayers}

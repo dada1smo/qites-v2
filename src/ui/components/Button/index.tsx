@@ -21,7 +21,7 @@ const buttonVariants = cva(
       padding: {
         clear: 'p-0',
         compact: 'py-1 px-4',
-        regular: 'py-3 px-6',
+        regular: 'py-2 px-6',
       },
       shape: {
         rounded: 'rounded-3xl',

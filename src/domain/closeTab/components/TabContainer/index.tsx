@@ -5,6 +5,8 @@ import useTab from '../../hooks/use-tab';
 import TabTotalForm from '../TabTotalForm';
 import TabItemSection from '../TabItemSection';
 import TabSummarySection from '../TabSummarySection';
+import Sheet from '@/src/ui/components/Sheet';
+import useSheet from '@/src/ui/hooks/use-sheet';
 
 const TabContainer: FunctionComponent = () => {
   const {
@@ -17,7 +19,7 @@ const TabContainer: FunctionComponent = () => {
   } = useTab();
 
   return (
-    <div className="mt-4 mb-[160px]">
+    <div className="mt-4 pb-[180px] overflow-hidden h-full">
       <TabTotalForm tab={tab} setTabTotal={setTabTotal} />
       {tab.getTotal() > 0 && (
         <TabItemSection

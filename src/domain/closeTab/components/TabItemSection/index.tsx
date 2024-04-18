@@ -51,7 +51,7 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
   };
 
   return (
-    <div className="mt-4 flex flex-col gap-4 overflow-y-auto">
+    <div className="mt-4 flex flex-col gap-4 overflow-y-auto h-full pb-4">
       <div>
         <List
           data={tab.getItemsSummary().map(({ id, payers, value }) => {

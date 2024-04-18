@@ -67,10 +67,11 @@ export default class TabModel {
   }
 
   public getUniquePayers() {
-    const payers = this.tabItems
+    const itemPayers = this.tabItems
       .map(({ payers }) => payers.map(({ name }) => name))
       .flat();
-    const unique = new Set(payers);
+    const splitPayers = this.tabSplit.map(({ name }) => name);
+    const unique = new Set([...itemPayers, ...splitPayers]);
     return Array.from(unique);
   }
 
@@ -205,6 +206,47 @@ export default class TabModel {
     };
   }
 
+  public calcPayment(payer: string) {
+    const lowercase = payer.toLocaleLowerCase();
+
+    const items = this.tabItems.filter((item) =>
+      item.payers.find((payer) => payer.name.toLocaleLowerCase() === lowercase)
+    );
+
+    const itemShare = items.map(
+      ({ expenses, serviceFee, payers }) =>
+        calcExpenseSumServiceFee(expenses, serviceFee?.percentage) /
+        payers.length
+    );
+
+    const reduce = itemShare.reduce((value, current) => value + current, 0);
+
+    const isSplit = this.tabSplit.find(
+      ({ name }) => name.toLocaleLowerCase() === lowercase
+    );
+
+    const remainderShare = isSplit
+      ? this.getRemaining() / this.tabSplit.length
+      : 0;
+
+    const total = reduce + remainderShare;
+
+    return parseFloat(total.toFixed(2));
+  }
+
+  public getPayment(payer: string) {
+    return {
+      name: payer,
+      payment: formatCurrency(this.calcPayment(payer)),
+    };
+  }
+
+  public getAllPayments() {
+    const payers = this.getUniquePayers();
+
+    return payers.map((payer) => this.getPayment(payer));
+  }
+
   public toJson() {
     return JSON.stringify({
       id: this.tabId,
@@ -220,7 +262,7 @@ export default class TabModel {
     }
 
     const json = JSON.parse(tab);
-    console.log(json);
+
     this.tabId = json.id;
     this.tabTotal = json.total;
     this.tabItems = json.items;
