@@ -34,6 +34,10 @@ const TabPayerForm: FunctionComponent<TabPayerFormProps> = ({
   });
 
   const submit = (data: any) => {
+    if (!data.name) {
+      return;
+    }
+
     addPayer(data);
     reset();
   };
