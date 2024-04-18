@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Space_Mono } from 'next/font/google';
 import './globals.css';
 import Nav from '@/src/ui/components/Nav';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,6 +33,7 @@ export default function RootLayout({
         <div className="amber-gradient-bg"></div>
         <Nav />
         {children}
+        <Analytics />
       </body>
     </html>
   );
