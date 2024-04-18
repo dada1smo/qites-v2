@@ -22,8 +22,6 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
 }) => {
   const defaultTotal = tab.getTotal() === 0 ? '' : `${tab.getTotal()}`;
 
-  console.log(defaultTotal);
-
   const { control, handleSubmit } = useCustomForm<TabTotalType>({
     schema: TabTotalSchema,
     defaultValues: {
