@@ -11,8 +11,13 @@ export default function useLocalStorage() {
     return localStorage.getItem(key);
   }
 
+  function removeLocalStorage(key: string) {
+    localStorage.removeItem(key);
+  }
+
   return {
     addToLocalStorage,
     findInLocalStorage,
+    removeLocalStorage,
   };
 }

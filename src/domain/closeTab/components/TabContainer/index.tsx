@@ -16,6 +16,7 @@ const TabContainer: FunctionComponent = () => {
     removeTabItem,
     splitTabRemainder,
     removeTabSplit,
+    closeTab,
   } = useTab();
 
   return (
@@ -30,7 +31,7 @@ const TabContainer: FunctionComponent = () => {
           removeTabSplit={removeTabSplit}
         />
       )}
-      <TabSummarySection tab={tab} />
+      <TabSummarySection tab={tab} closeTab={closeTab} />
     </div>
   );
 };

@@ -11,10 +11,12 @@ import { formatCurrency } from '@/src/utils/format';
 
 interface TabSummarySectionProps {
   tab: TabModel;
+  closeTab: Function;
 }
 
 const TabSummarySection: FunctionComponent<TabSummarySectionProps> = ({
   tab,
+  closeTab,
 }) => {
   const { open, willClose, openSheet, closeSheet } = useSheet();
 
@@ -24,15 +26,17 @@ const TabSummarySection: FunctionComponent<TabSummarySectionProps> = ({
     <div className="fixed left-0 bottom-0 w-screen h-[160px] bg-slate-900 rounded-t-3xl p-6 flex flex-col gap-2">
       <SummaryItem label="Restante" value={tabRemaining} />
       <SummaryItem label="Pagantes" value={tabPayers} />
-      <div className="mt-2 flex justify-center">
-        <Button
-          label="Pagamento por pessoa"
-          type="button"
-          color="main"
-          padding="regular"
-          onClick={() => openSheet()}
-        />
-      </div>
+      {tab.getUniquePayers().length > 0 && (
+        <div className="mt-2 flex justify-center">
+          <Button
+            label="Pagamento por pessoa"
+            type="button"
+            color="main"
+            padding="regular"
+            onClick={() => openSheet()}
+          />
+        </div>
+      )}
       <Sheet open={open} willClose={willClose} closeSheet={closeSheet}>
         <List
           data={tab.getAllPayments().map(({ name, payment }, index) => {
@@ -45,6 +49,18 @@ const TabSummarySection: FunctionComponent<TabSummarySectionProps> = ({
         />
         <div className="mt-2">
           <SummaryItem label="Total" value={formatCurrency(tab.getTotal())} />
+        </div>
+        <div className="mt-4 flex justify-center">
+          <Button
+            label="Encerrar conta"
+            type="button"
+            color="main"
+            padding="regular"
+            onClick={() => {
+              closeTab();
+              closeSheet(false);
+            }}
+          />
         </div>
       </Sheet>
     </div>

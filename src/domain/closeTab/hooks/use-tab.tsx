@@ -5,7 +5,8 @@ import useLocalStorage from '@/src/application/hooks/use-local-storage';
 import { TabPayerType } from '../types/TabPayerType';
 
 export default function useTab() {
-  const { addToLocalStorage, findInLocalStorage } = useLocalStorage();
+  const { addToLocalStorage, findInLocalStorage, removeLocalStorage } =
+    useLocalStorage();
 
   const [tab, setTab] = useState<TabModel>(new TabModel());
 
@@ -72,6 +73,11 @@ export default function useTab() {
     setTab(newTab);
   }
 
+  function closeTab() {
+    removeLocalStorage('qites-tab');
+    setTab(new TabModel());
+  }
+
   useEffect(() => {
     getStoredTab();
   }, []);
@@ -83,5 +89,6 @@ export default function useTab() {
     removeTabItem,
     splitTabRemainder,
     removeTabSplit,
+    closeTab,
   };
 }
