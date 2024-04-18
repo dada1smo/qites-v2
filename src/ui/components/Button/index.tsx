@@ -52,7 +52,7 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
   type: 'button' | 'submit';
   link?: {
     href: string;
-    onLinkClick: MouseEventHandler<HTMLAnchorElement>;
+    onLinkClick?: MouseEventHandler<HTMLAnchorElement>;
   };
   icon?: {
     src: string;

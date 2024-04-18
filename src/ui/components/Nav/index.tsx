@@ -44,7 +44,7 @@ const Nav: FunctionComponent = () => {
               size="lg"
               decoration="underline"
               link={{
-                href: '/conta',
+                href: '/como-funciona',
                 onLinkClick: () => closeSheet(false),
               }}
             />
