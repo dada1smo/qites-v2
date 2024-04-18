@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import TabModel from '../../models/TabModel';
 import { TabPayerType } from '../../types/TabPayerType';
 import List from '@/src/ui/components/List';
+import { formatCurrency } from '@/src/utils/format';
 
 interface TabSplitRemainderProps {
   tab: TabModel;
@@ -12,7 +13,7 @@ const TabSplitRemainder: FunctionComponent<TabSplitRemainderProps> = ({
   tab,
   tabPayers,
 }) => {
-  const { value, details } = tab.getSplitSummary();
+  const { value, details, remainder } = tab.getSplitSummary();
 
   return (
     <List
@@ -20,8 +21,10 @@ const TabSplitRemainder: FunctionComponent<TabSplitRemainderProps> = ({
         {
           id: 'remainder',
           item: 'Restante',
-          value: value,
-          details: `${details} por pessoa`,
+          value: remainder,
+          details: `${formatCurrency(
+            parseFloat((value / tabPayers.length).toFixed(2))
+          )} por pessoa (x${tabPayers.length})`,
         },
       ]}
     />

@@ -199,7 +199,8 @@ export default class TabModel {
 
     return {
       payers: `(Restante) ${this.tabSplit.map(({ name }) => name).join(', ')}`,
-      value: this.getRemainderCurrency(),
+      value: this.getRemaining(),
+      remainder: this.getRemainderCurrency(),
       details: formatCurrency(
         parseFloat((this.getRemaining() / payersLength).toFixed(2))
       ),
