@@ -69,7 +69,7 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
               {
                 id: 'remainder',
                 item: tab.getSplitSummary().payers,
-                value: tab.getSplitSummary().value,
+                value: tab.getSplitSummary().remainder,
                 onEdit: () => handleEditSplit(),
               },
             ]}

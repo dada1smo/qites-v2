@@ -13,7 +13,7 @@ const TabSplitRemainder: FunctionComponent<TabSplitRemainderProps> = ({
   tab,
   tabPayers,
 }) => {
-  const { value, details, remainder } = tab.getSplitSummary();
+  const { value, remainder } = tab.getSplitSummary();
 
   return (
     <List
