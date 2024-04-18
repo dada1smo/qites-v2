@@ -6,17 +6,23 @@ import TabItemForm from '../TabItemForm';
 import useSheet from '@/src/ui/hooks/use-sheet';
 import List from '@/src/ui/components/List';
 import { TabItemFormType } from '../../types/TabItemFormTypes';
+import Button from '@/src/ui/components/Button';
+import TabItemRemove from '../TabItemRemove';
 
 interface TabItemSectionProps {
   tab: TabModel;
   addTabItem: Function;
+  removeTabItem: Function;
   splitTabRemainder: Function;
+  removeTabSplit: Function;
 }
 
 const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
   tab,
   addTabItem,
+  removeTabItem,
   splitTabRemainder,
+  removeTabSplit,
 }) => {
   const { open, willClose, openSheet, closeSheet } = useSheet();
 
@@ -29,9 +35,19 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
     openSheet();
   };
 
+  const handleRemoveTabItem = (id: string) => {
+    removeTabItem(id);
+    closeSheet(false);
+  };
+
   const handleEditSplit = () => {
     setMode('split');
     openSheet();
+  };
+
+  const handleRemoveTabSplit = () => {
+    removeTabSplit();
+    closeSheet(false);
   };
 
   return (
@@ -47,16 +63,18 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
             };
           })}
         />
-        <List
-          data={[
-            {
-              id: 'remainder',
-              item: tab.getSplitSummary().payers,
-              value: tab.getSplitSummary().value,
-              onEdit: () => handleEditSplit(),
-            },
-          ]}
-        />
+        {tab.getSplit().length > 0 && (
+          <List
+            data={[
+              {
+                id: 'remainder',
+                item: tab.getSplitSummary().payers,
+                value: tab.getSplitSummary().value,
+                onEdit: () => handleEditSplit(),
+              },
+            ]}
+          />
+        )}
       </div>
       <ButtonCard
         label="Adicionar consumo"
@@ -76,7 +94,20 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
           }}
         />
       )}
-      <Sheet open={open} willClose={willClose} closeSheet={closeSheet}>
+      <Sheet
+        open={open}
+        willClose={willClose}
+        closeSheet={closeSheet}
+        headerOptions={
+          <TabItemRemove
+            mode={mode}
+            selectedId={selectedId}
+            handleRemoveTabItem={handleRemoveTabItem}
+            handleRemoveTabSplit={handleRemoveTabSplit}
+            canRemoveSplit={tab.getSplit().length > 0}
+          />
+        }
+      >
         <TabItemForm
           tab={tab}
           addTabItem={addTabItem}

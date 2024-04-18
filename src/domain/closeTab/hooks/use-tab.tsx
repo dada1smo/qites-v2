@@ -32,9 +32,29 @@ export default function useTab() {
     });
   }
 
+  function removeTabItem(id: string) {
+    return setTab((t) => {
+      const update = new TabModel().duplicate(t).removeItem(id);
+
+      storeTab(update);
+
+      return update;
+    });
+  }
+
   function splitTabRemainder(payers: TabPayerType[]) {
     return setTab((t) => {
       const update = new TabModel().duplicate(t).setSplitPayers(payers);
+
+      storeTab(update);
+
+      return update;
+    });
+  }
+
+  function removeTabSplit() {
+    return setTab((t) => {
+      const update = new TabModel().duplicate(t).removeSplit();
 
       storeTab(update);
 
@@ -60,6 +80,8 @@ export default function useTab() {
     tab,
     setTabTotal,
     addTabItem,
+    removeTabItem,
     splitTabRemainder,
+    removeTabSplit,
   };
 }

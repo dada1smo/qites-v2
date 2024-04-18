@@ -7,7 +7,14 @@ import TabItemSection from '../TabItemSection';
 import TabSummarySection from '../TabSummarySection';
 
 const TabContainer: FunctionComponent = () => {
-  const { tab, setTabTotal, addTabItem, splitTabRemainder } = useTab();
+  const {
+    tab,
+    setTabTotal,
+    addTabItem,
+    removeTabItem,
+    splitTabRemainder,
+    removeTabSplit,
+  } = useTab();
 
   return (
     <div className="mt-4 mb-[160px]">
@@ -16,7 +23,9 @@ const TabContainer: FunctionComponent = () => {
         <TabItemSection
           tab={tab}
           addTabItem={addTabItem}
+          removeTabItem={removeTabItem}
           splitTabRemainder={splitTabRemainder}
+          removeTabSplit={removeTabSplit}
         />
       )}
       <TabSummarySection tab={tab} />

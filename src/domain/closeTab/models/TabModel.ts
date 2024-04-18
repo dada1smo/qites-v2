@@ -102,6 +102,12 @@ export default class TabModel {
     return this;
   }
 
+  public removeItem(id: string) {
+    const filter = this.tabItems.filter((item) => item.id !== id);
+    this.tabItems = filter;
+    return this;
+  }
+
   public getItems() {
     return this.tabItems;
   }
@@ -175,14 +181,27 @@ export default class TabModel {
     return this;
   }
 
+  public removeSplit() {
+    this.tabSplit = [];
+
+    return this;
+  }
+
   public getSplit() {
     return this.tabSplit;
   }
 
+  public splitRemainder() {}
+
   public getSplitSummary() {
+    const payersLength = this.tabSplit.length > 0 ? this.tabSplit.length : 1;
+
     return {
       payers: `(Restante) ${this.tabSplit.map(({ name }) => name).join(', ')}`,
       value: this.getRemainderCurrency(),
+      details: formatCurrency(
+        parseFloat((this.getRemaining() / payersLength).toFixed(2))
+      ),
     };
   }
 

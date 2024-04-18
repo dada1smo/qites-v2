@@ -7,6 +7,7 @@ interface SheetProps {
   open: boolean;
   willClose: boolean;
   closeSheet: (open: boolean) => void;
+  headerOptions?: ReactNode;
   children: ReactNode;
 }
 
@@ -14,6 +15,7 @@ const Sheet: FunctionComponent<SheetProps> = ({
   open,
   willClose,
   closeSheet,
+  headerOptions,
   children,
 }) => {
   return (
@@ -29,7 +31,7 @@ const Sheet: FunctionComponent<SheetProps> = ({
             willClose && 'bottom-sheet-hide'
           } ${open ? 'bottom-0 bottom-sheet-show' : 'bottom-[-98dvh]'}`}
         >
-          <div className="mb-2">
+          <div className="mb-2 flex items-center">
             <Dialog.Close asChild>
               <Button
                 label="Fechar"
@@ -40,6 +42,11 @@ const Sheet: FunctionComponent<SheetProps> = ({
                 icon={{ src: '/arrow-back.svg', position: 'center', size: 24 }}
               />
             </Dialog.Close>
+            {headerOptions && (
+              <div className="grow flex items-center justify-end gap-2">
+                {headerOptions}
+              </div>
+            )}
           </div>
           {children}
         </Dialog.Content>
