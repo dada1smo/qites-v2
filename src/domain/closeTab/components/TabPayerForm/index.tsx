@@ -60,6 +60,7 @@ const TabPayerForm: FunctionComponent<TabPayerFormProps> = ({
             placeholder="Nome"
             type="text"
             fieldProps={{ color: 'alt' }}
+            onInputBlur={handleSubmit(submit)}
           />
           <Button
             label="Adicionar novo"

@@ -84,6 +84,7 @@ const TabTotalForm: FunctionComponent<TabTotalFormProps> = ({
                 size: 'full',
               }}
               autoFocus
+              onInputBlur={handleSubmit(submit)}
             />
             <Button
               label="Adicionar novo"
