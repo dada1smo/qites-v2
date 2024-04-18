@@ -80,6 +80,7 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
         label="Adicionar consumo"
         iconSrc="/add.svg"
         onClick={() => {
+          setSelectedId('');
           setMode('add');
           openSheet();
         }}
@@ -89,6 +90,7 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
           label="Pagar restante"
           iconSrc="/add.svg"
           onClick={() => {
+            setSelectedId('');
             setMode('split');
             openSheet();
           }}
