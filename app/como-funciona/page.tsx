@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react';
 
 const About: FunctionComponent = () => {
   return (
-    <main className="pt-16 pb-8 px-6 flex flex-col items-stretch h-screen gap-3 overflow-hidden">
+    <main className="pt-16 pb-8 px-6 flex flex-col items-stretch h-[100dvh] gap-3 overflow-hidden">
       <Typography as="h1" variant="h1">
         Como funciona
       </Typography>
