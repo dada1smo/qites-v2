@@ -26,7 +26,7 @@ const TabSummarySection: FunctionComponent<TabSummarySectionProps> = ({
       <SummaryItem label="Pagantes" value={tabPayers} />
       <div className="mt-2 flex justify-center">
         <Button
-          label="Ver pagamento individual"
+          label="Pagamento por pessoa"
           type="button"
           color="main"
           padding="regular"

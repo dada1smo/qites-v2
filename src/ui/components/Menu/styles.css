@@ -1,0 +1,51 @@
+.overlay-show {
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+.overlay-hide {
+  animation: overlayHide 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes overlayHide {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.left-menu-show {
+  animation: leftMenuShow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes leftMenuShow {
+  from {
+    left: -98dvw;
+  }
+  to {
+    left: 0;
+  }
+}
+
+.left-menu-hide {
+  animation: leftMenuHide 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes leftMenuHide {
+  from {
+    left: 0;
+  }
+  to {
+    left: -98dvw;
+  }
+}

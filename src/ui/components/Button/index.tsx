@@ -13,6 +13,10 @@ const buttonVariants = cva(
         main: `bg-teal-600 hover:bg-teal-700 text-slate-100`,
         alt: 'bg-slate-600 hover:bg-slate-700 text-slate-100',
       },
+      decoration: {
+        none: '',
+        underline: '!rounded-none border-dotted border-b-2 border-b-teal-900',
+      },
       size: {
         sm: 'text-sm',
         md: 'text-base min-h-[24px] min-w-[24px]',
@@ -25,7 +29,7 @@ const buttonVariants = cva(
       },
       shape: {
         rounded: 'rounded-3xl',
-        circle: 'rounde-full',
+        circle: 'rounded-full',
       },
       disabled: {
         true: 'opacity-50',
@@ -38,6 +42,7 @@ const buttonVariants = cva(
       padding: 'regular',
       shape: 'rounded',
       disabled: false,
+      decoration: 'none',
     },
   }
 );
@@ -47,6 +52,7 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
   type: 'button' | 'submit';
   link?: {
     href: string;
+    onLinkClick: MouseEventHandler<HTMLAnchorElement>;
   };
   icon?: {
     src: string;
@@ -68,9 +74,10 @@ const Button: FunctionComponent<ButtonProps> = ({
   padding,
   shape,
   disabled,
+  decoration,
 }) => {
   const buttonClasses = cn(
-    buttonVariants({ color, size, padding, shape, disabled })
+    buttonVariants({ color, size, padding, shape, disabled, decoration })
   );
 
   const iconComponent = (position: string) => {
@@ -101,7 +108,11 @@ const Button: FunctionComponent<ButtonProps> = ({
   };
 
   return link ? (
-    <NextLink href={link.href} className={buttonClasses}>
+    <NextLink
+      href={link.href}
+      className={buttonClasses}
+      onClick={link.onLinkClick}
+    >
       {icon && icon.position === 'before' && iconComponent(icon.position)}
       {icon && icon.position === 'center'
         ? iconComponent(icon.position)
