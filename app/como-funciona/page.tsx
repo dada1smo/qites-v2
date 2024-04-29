@@ -15,13 +15,13 @@ const About: FunctionComponent = () => {
           dividir contas e gastos entre pessoas.
         </Typography>
         <Typography as="p" variant="small">
-          Basicamente é uma calculadora. Só que com funcionalidades aplicadas.
+          É uma calculadora. Só que com funcionalidades aplicadas.
         </Typography>
         <Typography as="p" variant="small">
-          Em <strong>"Fechar conta"</strong>, você adiciona primeiro o total da
-          conta e em seguida pode adicionar consumos específicos de uma ou mais
-          pessoas. No fim, é possível dividir o restante entre todos os
-          participantes ou só alguns.
+          Em <strong>"Fechar conta"</strong>, você adiciona o total da conta e
+          em seguida pode incluir consumos específicos de uma ou mais pessoas.
+          No fim, você pode dividir o restante entre todos os participantes ou
+          só alguns.
         </Typography>
         <Typography as="p" variant="small">
           Clicando em <strong>"Pagamento por pessoa" </strong>é possível ver
@@ -37,8 +37,8 @@ const About: FunctionComponent = () => {
           automaticamente pra você continuar de onde parou.
         </Typography>
         <Typography as="p" variant="small">
-          O <strong>Qites</strong> é um projeto gratuito e open-source. Se
-          quiser dar uma olhada no código acesse:{' '}
+          <strong>Qites</strong> é um projeto gratuito e open-source. Se quiser
+          dar uma olhada no código acesse:{' '}
           <Button
             label="dada1smo/qites-v2"
             type="button"
