@@ -3,6 +3,7 @@ import { Inter, Space_Mono } from 'next/font/google';
 import './globals.css';
 import Nav from '@/src/ui/components/Nav';
 import { Analytics } from '@vercel/analytics/react';
+import ScreenSizeWarning from '@/src/application/components/ScreenSizeWarning';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,7 +31,8 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${inter.variable} ${space_mono.variable}`}>
-        <div className="amber-gradient-bg"></div>
+        <div className="amber-gradient-bg" />
+        <ScreenSizeWarning />
         <Nav />
         {children}
         <Analytics />
