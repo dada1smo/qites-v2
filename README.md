@@ -10,7 +10,7 @@ Não salvamos nada em banco de dados, apenas no Local Storage do seu navegador. 
 
 Se identificarmos que ainda temos uma conta sua salva, vamos abrir ela automaticamente pra você continuar de onde parou.
 
-Qites é um projeto gratuito e open-source, você pode encontrar uma versão ativa em: [https://qites.vercel.app/como-funciona](https://qites.vercel.app/como-funciona)
+Qites é um projeto gratuito e open-source, você pode encontrar uma versão ativa em: [https://qites.vercel.app](https://qites.vercel.app)
 
 ## Rodando localmente
 
