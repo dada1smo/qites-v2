@@ -3,7 +3,7 @@
 import { FunctionComponent } from 'react';
 import TabModel from '../../models/TabModel';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
-import useCustomForm from '@/src/application/hooks/use-custom-form';
+import useCustomForm from '@/src/infraestructure/hooks/use-custom-form';
 import { TabPayerSchema } from './validationSchema';
 import { TabPayerType } from '../../types/TabPayerType';
 import Form from '@/src/ui/components/Form';

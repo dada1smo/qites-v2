@@ -1,6 +1,6 @@
 'use client';
 
-import useLocalStorage from '@/src/application/hooks/use-local-storage';
+import useLocalStorage from '@/src/infraestructure/hooks/use-local-storage';
 import Button from '@/src/ui/components/Button';
 import Typography from '@/src/ui/components/Typography';
 import { FunctionComponent } from 'react';

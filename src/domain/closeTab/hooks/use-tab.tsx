@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TabModel from '../models/TabModel';
 import { TabItemType } from '../types/TabItemType';
-import useLocalStorage from '@/src/application/hooks/use-local-storage';
+import useLocalStorage from '@/src/infraestructure/hooks/use-local-storage';
 import { TabPayerType } from '../types/TabPayerType';
 
 export default function useTab() {

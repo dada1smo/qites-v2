@@ -3,7 +3,7 @@ import { Inter, Space_Mono } from 'next/font/google';
 import './globals.css';
 import Nav from '@/src/ui/components/Nav';
 import { Analytics } from '@vercel/analytics/react';
-import ScreenSizeWarning from '@/src/application/components/ScreenSizeWarning';
+import ScreenSizeWarning from '@/src/infraestructure/components/ScreenSizeWarning';
 
 const inter = Inter({
   subsets: ['latin'],

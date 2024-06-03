@@ -1,7 +1,7 @@
 import { FunctionComponent, useId, useState } from 'react';
 import TabModel from '../../models/TabModel';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
-import useCustomForm from '@/src/application/hooks/use-custom-form';
+import useCustomForm from '@/src/infraestructure/hooks/use-custom-form';
 import { TabExpenseType } from '../../types/TabExpenseType';
 import { TabExpenseSchema } from './validationSchema';
 import Form from '@/src/ui/components/Form';

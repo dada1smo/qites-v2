@@ -1,4 +1,4 @@
-import useCustomForm from '@/src/application/hooks/use-custom-form';
+import useCustomForm from '@/src/infraestructure/hooks/use-custom-form';
 import { FunctionComponent, useState } from 'react';
 import { TabTotalSchema } from './validationSchema';
 import { TabTotalType } from '../../types/TabTotalType';
