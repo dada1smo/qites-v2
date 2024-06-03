@@ -9,6 +9,8 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+  adjustFontFallback: false,
+  preload: false,
 });
 
 const space_mono = Space_Mono({
@@ -16,6 +18,8 @@ const space_mono = Space_Mono({
   display: 'swap',
   variable: '--font-space-mono',
   weight: ['400', '700'],
+  adjustFontFallback: false,
+  preload: false,
 });
 
 export const metadata: Metadata = {
