@@ -1,13 +1,13 @@
 import { FunctionComponent, useState } from 'react';
-import TabModel from '../../models/TabModel';
+import TabModel from '../../../models/TabModel';
 import ButtonCard from '@/src/ui/components/ButtonCard';
 import Sheet from '@/src/ui/components/Sheet';
-import TabItemForm from '../TabItemForm';
 import useSheet from '@/src/ui/hooks/use-sheet';
 import List from '@/src/ui/components/List';
-import { TabItemFormType } from '../../types/TabItemFormTypes';
+import { TabItemFormType } from '../../../types/TabItemFormTypes';
 import Button from '@/src/ui/components/Button';
-import TabItemRemove from '../TabItemRemove';
+import TabItemRemove from '../../TabItemRemove';
+import TabItemForm from '../TabItemForm';
 
 interface TabItemSectionProps {
   tab: TabModel;
@@ -51,7 +51,7 @@ const TabItemSection: FunctionComponent<TabItemSectionProps> = ({
   };
 
   return (
-    <div className="mt-4 flex flex-col gap-4 overflow-y-auto h-full pb-4">
+    <div className="flex flex-col gap-4 overflow-y-auto h-full pb-4">
       <div>
         <List
           data={tab.getItemsSummary().map(({ id, payers, value }) => {

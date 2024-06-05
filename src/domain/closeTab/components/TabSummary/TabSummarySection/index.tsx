@@ -1,7 +1,7 @@
 'use client';
 
 import { FunctionComponent } from 'react';
-import TabModel from '../../models/TabModel';
+import TabModel from '../../../models/TabModel';
 import SummaryItem from '@/src/ui/components/SummaryItem';
 import Sheet from '@/src/ui/components/Sheet';
 import useSheet from '@/src/ui/hooks/use-sheet';
@@ -23,7 +23,7 @@ const TabSummarySection: FunctionComponent<TabSummarySectionProps> = ({
   const { tabRemaining, tabPayers } = tab.getTabSummary();
 
   return (
-    <div className="fixed left-0 bottom-0 w-screen h-[160px] bg-slate-900 rounded-t-3xl p-6 flex flex-col gap-2">
+    <div className="fixed left-0 bottom-0 w-screen h-[160px] bg-slate-900 rounded-t-2xl py-4 px-6 flex flex-col gap-2">
       <SummaryItem label="Restante" value={tabRemaining} />
       <SummaryItem label="Pagantes" value={tabPayers} />
       {tab.getUniquePayers().length > 0 && (
