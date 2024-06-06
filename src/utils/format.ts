@@ -12,3 +12,9 @@ export const formatCurrency = (value?: number | string) => {
 
   return currencyBR;
 };
+
+export function formatFloatLocale(value: string) {
+  const split = value.split(',');
+  const join = split.join('.');
+  return join;
+}

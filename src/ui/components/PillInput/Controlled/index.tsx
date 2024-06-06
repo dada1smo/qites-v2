@@ -2,6 +2,7 @@ import { ChangeEvent, FunctionComponent, HTMLInputTypeAttribute } from 'react';
 import { Control, Controller, FieldErrors, FieldValues } from 'react-hook-form';
 import PillInput, { PillInputProps, fieldVariants } from '../Base';
 import { VariantProps } from 'class-variance-authority';
+import { formatFloatLocale } from '@/src/utils/format';
 
 interface ControlledPillInputProps {
   name: string;
@@ -111,7 +112,5 @@ function handleNumberInput(
 
 const handleCommaLocaleFloat = (e: ChangeEvent<HTMLInputElement>) => {
   const { value } = e.target;
-  const split = value.split(',');
-  const join = split.join('.');
-  return join;
+  return formatFloatLocale(value);
 };

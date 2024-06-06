@@ -6,6 +6,7 @@ import { TabItemSchema } from './validationSchema';
 import { coerceToNumber } from '@/src/utils/coerce';
 import ControlledPillInput from '@/src/ui/components/PillInput/Controlled';
 import ControlledNumberInput from '@/src/ui/components/NumberInput/Controlled';
+import { formatFloatLocale } from '@/src/utils/format';
 
 interface TabItemDetailsFormProps {}
 
@@ -14,6 +15,7 @@ const TabItemDetailsForm: FunctionComponent<TabItemDetailsFormProps> = () => {
     id: crypto.randomUUID(),
     item: '',
     value: '',
+    total: '',
     quantity: 1,
   };
 
@@ -23,9 +25,58 @@ const TabItemDetailsForm: FunctionComponent<TabItemDetailsFormProps> = () => {
       defaultValues,
     });
 
-  const handleValues = () => {
-    const values = getValues();
-    console.log(values);
+  const coerceValuesToNumber = (
+    initialValue?: string,
+    initialQuantity?: string,
+    initialTotal?: string
+  ) => {
+    const formValues = getValues();
+    const value = coerceToNumber(initialValue || formValues.value);
+    const quantity = coerceToNumber(initialQuantity || formValues.quantity);
+    const total = coerceToNumber(initialTotal || formValues.total);
+
+    return { value, quantity, total };
+  };
+
+  const handleQuantity = (inputValue: string) => {
+    const { value, quantity, total } = coerceValuesToNumber(
+      undefined,
+      inputValue,
+      undefined
+    );
+
+    if (value === 0 && total === 0) {
+      return;
+    }
+
+    if (value > 0) {
+      console.log(formatResult(value * quantity));
+      return setValue('total', formatResult(value * quantity));
+    }
+
+    if (total > 0) {
+      return setValue('value', formatResult(total / quantity));
+    }
+  };
+
+  const handleValue = (inputValue: string) => {
+    const { value, quantity, total } = coerceValuesToNumber(
+      inputValue,
+      undefined,
+      undefined
+    );
+
+    return setValue('total', formatResult(value * quantity));
+  };
+
+  const handleTotal = (inputValue: string) => {
+    const { value, quantity, total } = coerceValuesToNumber(
+      undefined,
+      undefined,
+      inputValue
+    );
+
+    return setValue('value', formatResult(total / quantity));
   };
 
   const submit = (data: any) => {
@@ -51,6 +102,7 @@ const TabItemDetailsForm: FunctionComponent<TabItemDetailsFormProps> = () => {
           control={control}
           name="quantity"
           fieldProps={{ color: 'transparent', padding: 'clear' }}
+          onInputChange={handleQuantity}
         />
       </div>
       <div className="flex flex-col bg-slate-800 py-2 px-3 rounded-2xl">
@@ -64,6 +116,7 @@ const TabItemDetailsForm: FunctionComponent<TabItemDetailsFormProps> = () => {
           inputMode="decimal"
           pattern="[0-9]*"
           fieldProps={{ color: 'transparent', padding: 'clear' }}
+          onInputChange={handleValue}
         />
       </div>
       <div className="flex flex-col bg-slate-800 py-2 px-3 rounded-2xl">
@@ -77,6 +130,7 @@ const TabItemDetailsForm: FunctionComponent<TabItemDetailsFormProps> = () => {
           inputMode="decimal"
           pattern="[0-9]*"
           fieldProps={{ color: 'transparent', padding: 'clear' }}
+          onInputChange={handleTotal}
         />
       </div>
     </Form>
@@ -84,3 +138,7 @@ const TabItemDetailsForm: FunctionComponent<TabItemDetailsFormProps> = () => {
 };
 
 export default TabItemDetailsForm;
+
+function formatResult(result: number) {
+  return result.toFixed(2).toString();
+}

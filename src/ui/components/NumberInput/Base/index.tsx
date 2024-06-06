@@ -33,7 +33,7 @@ const NumberInput: FunctionComponent<NumberInputProps> = ({
     const targetValue = e.target.value.replace(/\D+/g, '');
     const numberValue = coerceToNumber(targetValue);
 
-    if (numberValue >= 0 && numberValue <= 999) {
+    if (numberValue >= 1 && numberValue <= 999) {
       setInputValue(targetValue);
       onChange(e);
     }
@@ -44,7 +44,7 @@ const NumberInput: FunctionComponent<NumberInputProps> = ({
     const eq = numberValue + step;
     const toString = eq.toString();
 
-    if (eq >= 0 && eq <= 999) {
+    if (eq >= 1 && eq <= 999) {
       setInputValue(toString);
       onChange({ target: { value: toString } });
     }
