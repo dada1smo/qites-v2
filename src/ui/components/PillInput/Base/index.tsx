@@ -3,6 +3,7 @@ import {
   FocusEventHandler,
   FunctionComponent,
   HTMLInputTypeAttribute,
+  ReactNode,
 } from 'react';
 import Typography from '../../Typography';
 import { VariantProps, cva } from 'class-variance-authority';
@@ -25,11 +26,16 @@ export const fieldVariants = cva(
         grow: '',
         full: '[&>div>input]:!w-full [&>div>input]:!max-w-full',
       },
+      textAlign: {
+        left: '[&>div>input]:text-left',
+        center: '[&>div>input]:text-center',
+      },
     },
     defaultVariants: {
       color: 'main',
       padding: 'regular',
       size: 'grow',
+      textAlign: 'left',
     },
   }
 );
@@ -58,6 +64,9 @@ export interface PillInputProps {
     | 'decimal';
   pattern?: string;
   autoFocus?: boolean;
+  buttonBefore?: ReactNode;
+  buttonAfter?: ReactNode;
+  inputSize?: number;
 }
 
 const PillInput: FunctionComponent<PillInputProps> = ({
@@ -76,8 +85,11 @@ const PillInput: FunctionComponent<PillInputProps> = ({
   inputMode,
   pattern,
   autoFocus,
+  buttonBefore,
+  buttonAfter,
+  inputSize,
 }) => {
-  const valueSize = value ? value.length : 4;
+  const valueSize = handleSize(value, inputSize);
 
   return (
     <div className={cn(fieldVariants({ ...fieldProps }))}>
@@ -92,6 +104,7 @@ const PillInput: FunctionComponent<PillInputProps> = ({
             {preffix}
           </Typography>
         )}
+        {buttonBefore && buttonBefore}
         <input
           name={name}
           id={name}
@@ -110,9 +123,22 @@ const PillInput: FunctionComponent<PillInputProps> = ({
           style={{ width: `${valueSize}ch` }}
           autoFocus={autoFocus}
         />
+        {buttonAfter && buttonAfter}
       </div>
     </div>
   );
 };
 
 export default PillInput;
+
+function handleSize(value?: string, inputSize?: number) {
+  if (inputSize) {
+    return inputSize;
+  }
+
+  if (value) {
+    return value.length;
+  }
+
+  return 4;
+}

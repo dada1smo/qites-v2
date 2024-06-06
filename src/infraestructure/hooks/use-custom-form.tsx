@@ -18,6 +18,8 @@ export default function useCustomForm<T>({
     reset,
     watch,
     register,
+    getValues,
+    setValue,
   } = useForm<FieldValues, T>({ resolver: zodResolver(schema), defaultValues });
 
   return {
@@ -27,5 +29,7 @@ export default function useCustomForm<T>({
     reset,
     watch,
     register,
+    getValues,
+    setValue,
   };
 }
